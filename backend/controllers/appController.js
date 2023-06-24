@@ -6,6 +6,7 @@ const fs = require('fs');
 const Goal = require("../models/goalsModel");
 const User = require("../models/userModel");
 const Content = require("../models/contentModel");
+const {arrangeContent} = require("../helpers/arrangeData")
 
 // File Saving 
 
@@ -21,8 +22,9 @@ const saveFile = (file) => {
   const fileId = uuidv4();
   const originalFileName = file.originalname;
   const extension = path.extname(originalFileName);
-  const uniqueFileName =
-    originalFileName.replace(extension, "") + "-" + fileId + extension;
+  const fileNameWithoutExtension = originalFileName.replace(extension, "");
+  const fileNameWithoutSpaces = fileNameWithoutExtension.replace(/\s+/g, "");
+  const uniqueFileName = fileNameWithoutSpaces + "-" + fileId + extension;
 
     const filePath = path.join(folder, uniqueFileName);
 
@@ -52,22 +54,6 @@ const saveMultipleFiles = async (files) => {
     filePaths.push(filePath);
   }
   return filePaths;
-};
-
-// File Arranger
-
-const arrangerData = (data) => {
-  return data.map((obj) => {
-    const transformedObj = { ...obj }; // Copy the original object
-
-    if (Array.isArray(obj.content) && obj.content.length > 0) {
-      transformedObj.content = obj.content.map((item) => item.Url);
-    } else {
-      transformedObj.content = obj.content.Url || obj.content;
-    }
-
-    return transformedObj;
-  });
 };
 
 // @disc Get users
@@ -219,7 +205,7 @@ const deleteUserGoals = asyncHandler(async (req, res) => {
 // @access General
 const getContent = asyncHandler(async (req, res) => {
   const content = await Content.find();
-  const appContent = content.length === 0 ? content : arrangerData(content);
+  const appContent = content.length > 0 ? arrangeContent(content) : content;
 
   res.status(200).json(appContent);
 });
