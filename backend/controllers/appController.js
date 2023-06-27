@@ -6,10 +6,9 @@ const fs = require('fs');
 const Goal = require("../models/goalsModel");
 const User = require("../models/userModel");
 const Content = require("../models/contentModel");
-const {arrangeContent} = require("../helpers/arrangeData")
+const {arrangeContent, arrangeStoredContent, arrangeStoredUrl} = require("../helpers/arrangeData")
 
 // File Saving 
-
 const saveFile = (file) => {
   let folder;
   if (file.mimetype.startsWith("image/")) {
@@ -56,6 +55,30 @@ const saveMultipleFiles = async (files) => {
   return filePaths;
 };
 
+// File Deleting
+const deleteFile = (filePath) => {
+  return new Promise((resolve, reject) => {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error deleting file:', err);
+        reject(err);
+      }
+      console.log('File deleted successfully.');
+      resolve(filePath);
+    });
+  })
+};
+
+const deleteMultipleFiles = async (filePaths) => {
+  const deletedFiles = [];
+    for (let i = 0; i < filePaths.length; i++) {
+      const filePath = filePaths[i];
+      const details = await deleteFile(filePath);
+      deletedFiles.push(details);
+    }
+    return filePaths;
+};
+
 // @disc Get users
 // @route GET/api/app/users
 // @access Privet
@@ -88,7 +111,7 @@ const updateUserRole = asyncHandler(async (req, res) => {
   res.status(200).json(updatedRole);
 });
 
-// @disc Delete User Role
+// @disc Delete User
 // @route DELETE/api/app/users/:id
 // @access Privet
 const deleteUser = asyncHandler(async (req, res) => {
@@ -230,6 +253,12 @@ const setContent = asyncHandler(async (req, res) => {
     throw new Error("Title already exists");
   }
 
+  // Checking for content type error
+  if (type === "text" && !content || type !== "text" && req.files <= 0) {
+    res.status(400);
+    throw new Error("Wrong content type");
+  }
+
   let fileData;
 
   if (type !== "text") {
@@ -258,6 +287,110 @@ const setContent = asyncHandler(async (req, res) => {
   }
 });
 
+// @disc Update Content
+// @route PUT/api/app/content/:id
+// @access Privet
+const updateContent = asyncHandler(async (req, res) => {
+  const findContentDB = await Content.findById(req.params.id);
+
+  if (!findContentDB) {
+    res.status(400);
+    throw new Error("Content not found");
+  }
+  const contentDB = arrangeStoredContent(findContentDB);
+
+  const { header, title, description, type, content } = req.body;
+
+  if (!header || !title || !description || !type || !content && req.files <= 0) {
+    res.status(400);
+    throw new Error("Missing required fields");
+  }
+
+  const titleExists = await Content.findOne({ title });
+
+  if (titleExists && title !== contentDB.title) {
+    res.status(400);
+    throw new Error("Title already exists");
+  }
+
+  // Check if content are the same
+  let ifTheSame = false; 
+  if (arrangeStoredUrl(findContentDB).content === content) {
+    ifTheSame = true;
+  }
+
+  // Checking for content type error
+  if (type === "text" && !content || type !== "text" && req.files <= 0 && !ifTheSame) {
+    res.status(400);
+    throw new Error("Wrong content type");
+  }
+
+  let NewContent;
+  let deletedFile;
+  
+  if (type !== "text" && !req.files <= 0) {
+    if (req.files.length > 1) {
+      NewContent = await saveMultipleFiles(req.files)
+    } else {
+      NewContent = await saveFile(req.files[0])
+    }
+    if (Array.isArray(contentDB.content)) {
+      deletedFile = await deleteMultipleFiles(contentDB.content);
+    } else if (contentDB.type !== "text") {
+      deletedFile = await deleteFile(contentDB.content);
+    }
+  } else if (type === "text" && contentDB.type !== "text") {
+     NewContent = content;
+     if (Array.isArray(contentDB.content)) {
+      deletedFile = await deleteMultipleFiles(contentDB.content);
+    } else {
+      deletedFile = await deleteFile(contentDB.content);
+    }
+  } else {
+    NewContent = content;
+  }
+
+  const UpdateContent = {
+    header,
+    title,
+    description,
+    type,
+    content: NewContent,
+  };
+
+  const updatedContent = await Content.findByIdAndUpdate(req.params.id, UpdateContent, {
+    new: true,
+  });
+
+  res.status(200).json(updatedContent);
+});
+
+// @disc Delete Content
+// @route DELETE/api/app/content/:id
+// @access Privet
+const deleteContent = asyncHandler(async (req, res) => {
+  const findContentDB = await Content.findById(req.params.id);
+
+  if (!findContentDB) {
+    res.status(400);
+    throw new Error("Content not found");
+  }
+  const contentDB = arrangeStoredContent(findContentDB);
+
+  let deletedFile;
+
+  if (contentDB.type !== "text") {
+    if (Array.isArray(contentDB.content)) {
+      deletedFile = await deleteMultipleFiles(contentDB.content);
+    } else {
+      deletedFile = await deleteFile(contentDB.content);
+    }
+  }
+  await Content.deleteOne(findContentDB);
+
+  res.status(200).json(`${contentDB.header} ${contentDB.title}`);
+});
+
 module.exports = {
   getUsers,
   updateUserRole,
@@ -267,4 +400,6 @@ module.exports = {
   deleteUserGoals,
   getContent,
   setContent,
+  updateContent,
+  deleteContent
 };

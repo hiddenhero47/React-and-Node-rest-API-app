@@ -9,8 +9,8 @@ const {
     deleteUserGoals,
     getContent,
     setContent,
-    // deleteContent,
-    // updateContent,
+    deleteContent,
+    updateContent,
     // getContentByTitle,
 } = require("../controllers/appController");
 const {secureRole} = require('../middleware/authMiddleware');
@@ -23,7 +23,7 @@ router.route("/users/goals/:id").get(secureRole("admin"), getUserGoals);
 router.route("/users/goals/:id").put(secureRole("admin"), updateUserGoal).delete(secureRole("admin"), deleteUserGoals);
 // Content Management
 router.route("/content").get(getContent).post(secureRole("admin"), setContent);
-// router.route("/content/:id").delete(secureRole(admin), deleteContent).put(secureRole, updateContent);
+router.route("/content/:id").delete(secureRole("admin"), deleteContent).put(secureRole("admin"), updateContent);
 // router.route("/content/:title").get(getContentByTitle);
 
 module.exports = router;

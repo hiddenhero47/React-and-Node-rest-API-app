@@ -27,4 +27,50 @@ const arrangeContent = (data) => {
     return newData;
 };
 
-module.exports = {arrangeContent};
+const arrangeStoredContent = (data) => {
+  const obj = data.toJSON();
+  const newObj = {};
+
+  for (let key in obj) {
+    if (key !== "content") {
+      newObj[key] = obj[key];
+    } else {
+      const content = obj[key];
+
+      if (Array.isArray(content)) {
+        newObj[key] = content.map((item) => item.Path);
+      } else if (typeof content === "object") {
+        newObj[key] = content.Path;
+      } else {
+        newObj[key] = content;
+      }
+    }
+  }
+
+  return newObj;
+};
+
+const arrangeStoredUrl = (data) => {
+  const obj = data.toJSON();
+  const newObj = {};
+
+  for (let key in obj) {
+    if (key !== "content") {
+      newObj[key] = obj[key];
+    } else {
+      const content = obj[key];
+
+      if (Array.isArray(content)) {
+        newObj[key] = content.map((item) => item.Url);
+      } else if (typeof content === "object") {
+        newObj[key] = content.Url;
+      } else {
+        newObj[key] = content;
+      }
+    }
+  }
+
+  return newObj;
+};
+
+module.exports = {arrangeContent, arrangeStoredContent, arrangeStoredUrl};
