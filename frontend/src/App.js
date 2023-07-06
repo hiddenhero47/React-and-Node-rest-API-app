@@ -8,12 +8,14 @@ import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Header from "./components/layout/header";
 
 function App() {
   return (
     <>
       <Router>
         <div className="containerBody">
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
