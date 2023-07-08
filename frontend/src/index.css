@@ -10,6 +10,12 @@
   url("./fonts/Urbanist/static/Urbanist-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Outfit";
+  src: local("./fonts/Outfit/static/Outfit-Regular.ttf"),
+  url("./fonts/Outfit/static/Outfit-Regular.ttf") format("truetype");
+}
+
 body {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

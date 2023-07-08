@@ -15,12 +15,15 @@ import { Mail, Call } from "../icons/mail&CallIcon";
 
 function Header() {
   const phoneNumber = "+01 569 896 654";
+  const alink = "https://web.facebook.com/login/?_rdc=1&_rdr";
   const screenSize = useScreenSize();
   return (
     <header style={{ width: "100%", height: "164px" }}>
       <NavStyle>
         <div className="navBody">
+
           <div className="navTop">
+
             <div className="boxHeader">
               <div className="box">
                 <i>
@@ -28,21 +31,24 @@ function Header() {
                 </i>
                 <i className="timeText">Mon - Sat 08:00 to 05:00</i>
               </div>
+
               <div className="box">
+
                 <span className="socialIcon">
-                  <a href="">
+                  <a href={alink}>
                     <Instagram width={17.5} height={17.5} />
                   </a>
-                  <a href="">
+                  <a href={alink}>
                     <FaceBook width={17.5} height={17.5} />
                   </a>
-                  <a href="">
+                  <a href={alink}>
                     <Twitter width={17.5} height={17.5} />
                   </a>
-                  <a href="">
+                  <a href={alink}>
                     <Pinterest width={17.5} height={17.5} />
                   </a>
                 </span>
+
                 <ul className="nav-options login">
                   <li className="list listTop">
                     <Link to="/login">
@@ -55,8 +61,11 @@ function Header() {
                     </Link>
                   </li>
                 </ul>
+
               </div>
+
             </div>
+
             <div className="navBox">
               <div className="box">
                 <div>
@@ -64,6 +73,7 @@ function Header() {
                   <LogoText width={230} height={23} />
                 </div>
               </div>
+
               <div className="box end">
                 <div className="middle">
                   <div className="middleIcon">
@@ -74,6 +84,7 @@ function Header() {
                     <div>satnacontractors.com</div>
                   </span>
                 </div>
+
                 <div className="middle">
                   <div className="middleIcon">
                     <Call width={53} height={53} />
@@ -84,10 +95,14 @@ function Header() {
                   </span>
                 </div>
               </div>
+
             </div>
           </div>
+
           <div className="navBottom">
+
             <div className="navBox">
+
               <ul className="nav-options">
                 <li className="list nowrap">
                   <Link to="/">
@@ -115,11 +130,14 @@ function Header() {
                   </Link>
                 </li>
               </ul>
+
               <span className="questionsBtn">
                 <Link to="/contact-us">Have Any Questions?</Link>
               </span>
+
             </div>
           </div>
+
         </div>
       </NavStyle>
     </header>
