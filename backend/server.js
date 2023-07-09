@@ -7,6 +7,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 5001;
 const path = require("path");
+const handleCors = require("./middleware/corsMiddleware");
 
 
 connectDB();
@@ -21,6 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Declaring Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+//middleware cors
+app.use(handleCors);
 
 app.use("/api/goals", require("./routes/goalRoutes"));
 app.use("/api/users", require("./routes/useRoutes"));
