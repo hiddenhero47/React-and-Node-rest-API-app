@@ -1,11 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { MyForm, FormControl } from "./registrationForm.style";
 import { registration } from "./validation";
 import { TriangleWarning as Warning } from "../../components/icons/warningSings";
+import { register, reset } from "../../features/auth/authSlice";
 
 function RegistrationForm() {
-  const onSubmit = () => {};
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      toast.success("Successful");
+      navigate("/dashboard");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const onSubmit = async (values) => {
+    const userData = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      role: "basic",
+    };
+    dispatch(register(userData));
+  };
 
   const {
     // setErrors,
@@ -29,8 +60,6 @@ function RegistrationForm() {
   });
 
   const { name, email, password, confirmPassword } = values;
-
-  const [isLoading] = useState(false);
 
   return (
     <MyForm onSubmit={handleSubmit}>
