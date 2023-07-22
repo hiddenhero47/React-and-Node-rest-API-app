@@ -1,11 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { MyForm, FormControl } from "./loginForm.style";
-import { login } from "./validation";
+import { loginFormSchema } from "./validation";
 import { TriangleWarning as Warning } from "../../components/icons/warningSings";
+import { login, reset } from "../../features/auth/authSlice";
 
 function LoginForm() {
-  const onSubmit = () => {};
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      toast.success("Successful");
+      navigate("/dashboard");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const onSubmit = async (values) => {
+    const userData = {
+      email: values.email,
+      password: values.password,
+    };
+    dispatch(login (userData));
+  };
 
   const {
     values,
@@ -19,13 +49,11 @@ function LoginForm() {
       email: "",
       password: "",
     },
-    validationSchema: login,
+    validationSchema: loginFormSchema,
     onSubmit,
   });
 
   const { email, password } = values;
-
-  const [isLoading] = useState(false);
 
   return (
     <MyForm onSubmit={handleSubmit}>

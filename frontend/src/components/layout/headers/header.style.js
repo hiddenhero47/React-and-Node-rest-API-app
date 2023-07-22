@@ -173,6 +173,12 @@ export const NavStyle = styled.nav`
     font-family: Poppins;
   }
 
+  .listTop button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
   .talkTo {
     display: flex;
     flex-direction: column;
@@ -210,5 +216,30 @@ export const NavStyle = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (min-width: 835px) and (max-width: 961px) {
+    .navTop {
+      .navBox {
+        width: 80%;
+        margin-left: 12%;
+      }
+    }
+    .navBottom {
+    width: 80%;
+    }
+  }
+
+  @media (min-width: 500px) and (max-width: 834px) {
+    .navTop {
+      .navBox {
+        width: 95%;
+        margin-left: 0;
+      }
+    }
+    .navBottom {
+    width: 95%;
+    left: 37%;
+    }
   }
 `;

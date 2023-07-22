@@ -1,29 +1,41 @@
 import React from "react";
 import { NavStyle } from "./header.style";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useScreenSize } from "../../appHelpers/screenSize";
+import { Link, useNavigate } from "react-router-dom";
+import { useScreenSize } from "../../../appHelpers/screenSize";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../../../features/auth/authSlice";
 import {
   TimeCircle,
   Instagram,
   FaceBook,
   Twitter,
   Pinterest,
-} from "../icons/socialMedia";
-import { Logo, LogoText } from "../icons/appLogo";
-import { Mail, Call } from "../icons/mail&CallIcon";
+} from "../../icons/socialMedia";
+import { Logo, LogoText } from "../../icons/appLogo";
+import { Mail, Call } from "../../icons/mail&CallIcon";
 
 function Header() {
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   const phoneNumber = "+01 569 896 654";
   const alink = "https://web.facebook.com/login/?_rdc=1&_rdr";
   const screenSize = useScreenSize();
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
+
   return (
     <header style={{ width: "100%", height: "164px" }}>
       <NavStyle>
         <div className="navBody">
-
           <div className="navTop">
-
             <div className="boxHeader">
               <div className="box">
                 <i>
@@ -33,7 +45,6 @@ function Header() {
               </div>
 
               <div className="box">
-
                 <span className="socialIcon">
                   <a href={alink}>
                     <Instagram width={17.5} height={17.5} />
@@ -50,20 +61,28 @@ function Header() {
                 </span>
 
                 <ul className="nav-options login">
-                  <li className="list listTop">
-                    <Link to="/login">
-                      <FaSignInAlt /> Login
-                    </Link>
-                  </li>
-                  <li className="list listTop">
-                    <Link to="/register">
-                      <FaUser /> Register
-                    </Link>
-                  </li>
+                  {user ? (
+                    <li className="list listTop">
+                      <button onClick={onLogout}>
+                        <FaSignOutAlt /> Logout
+                      </button>
+                    </li>
+                  ) : (
+                    <>
+                      <li className="list listTop">
+                        <Link to="/login">
+                          <FaSignInAlt /> Login
+                        </Link>
+                      </li>
+                      <li className="list listTop">
+                        <Link to="/register">
+                          <FaUser /> Register
+                        </Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
-
               </div>
-
             </div>
 
             <div className="navBox">
@@ -95,14 +114,11 @@ function Header() {
                   </span>
                 </div>
               </div>
-
             </div>
           </div>
 
           <div className="navBottom">
-
             <div className="navBox">
-
               <ul className="nav-options">
                 <li className="list nowrap">
                   <Link to="/">
@@ -134,10 +150,8 @@ function Header() {
               <span className="questionsBtn">
                 <Link to="/contact-us">Have Any Questions?</Link>
               </span>
-
             </div>
           </div>
-
         </div>
       </NavStyle>
     </header>

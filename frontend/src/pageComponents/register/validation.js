@@ -3,7 +3,7 @@ import * as yup from "yup";
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
-export const registration = yup.object().shape({
+export const registrationSchema = yup.object().shape({
   email: yup
     .string()
     .matches(emailRegex, {

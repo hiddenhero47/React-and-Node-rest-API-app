@@ -1,9 +1,68 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
+import HeaderTitle from "../components/layout/headerTitle/myHeaderTitle";
+import SliderContainer from "../components/slider/fullViewSlider/fullViewSlider";
+import { LogoText } from "../components/icons/appLogo";
+import MyVideo from "../pageComponents/home/video/homeVideo";
+import OurServices from "../components/services/services";
+import AboutUs from "../pageComponents/home/aboutInHome/about";
+
+const TitleBerar = styled.div`
+  width: 100%;
+`;
+
+const Style = styled.div`
+  width: 100%;
+
+  .titleEnd {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span {
+    margin-left: 5%;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0em;
+    color: #151515;
+  }
+
+  .our-services {
+    margin-top: 45px;
+    width: 100%;
+    height: auto;
+  }
+`;
 
 function Home() {
   return (
-    <div className='test'>Home</div>
-  )
+    <>
+      <TitleBerar>
+        <HeaderTitle page={"Home"} />
+      </TitleBerar>
+
+      <Style>
+        <div className="titleEnd">
+          <LogoText width={230} height={23} />
+          <span>Watch how we build your future today!</span>
+        </div>
+
+        <MyVideo />
+
+        <div className="our-services">
+          <OurServices />
+        </div>
+
+        <AboutUs />
+
+      </Style>
+    </>
+  );
 }
 
-export default Home
+export default Home;
