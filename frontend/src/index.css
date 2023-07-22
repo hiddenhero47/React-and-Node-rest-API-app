@@ -5,15 +5,33 @@
 }
 
 @font-face {
+  font-family: "PoppinsBold";
+  src: local("./fonts/Poppins/Poppins-Bold.ttf"),
+  url("./fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Urbanist";
   src: local("./fonts/Urbanist/static/Urbanist-Regular.ttf"),
   url("./fonts/Urbanist/static/Urbanist-Regular.ttf") format("truetype");
 }
 
 @font-face {
+  font-family: "UrbanistBold";
+  src: local("./fonts/Urbanist/static/Urbanist-Bold.ttf format"),
+  url("./fonts/Urbanist/static/Urbanist-Bold.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Outfit";
   src: local("./fonts/Outfit/static/Outfit-Regular.ttf"),
   url("./fonts/Outfit/static/Outfit-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: local("./fonts/Inter/static/Inter-Regular.ttf"),
+  url("./fonts/Inter/static/Inter-Regular.ttf") format("truetype");
 }
 
 body {
@@ -33,8 +51,9 @@ body {
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  position: relative;
 }
 
 .test {

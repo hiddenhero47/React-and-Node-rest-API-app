@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import HeaderTitle from "../components//layout/headerTitle/myHeaderTitle";
 
 function ContactUs() {
   return (
-    <div className='test'>Contact-Us</div>
-  )
+    <>
+      <HeaderTitle page={"Contact Us"} />
+      <div className="test">Contact-Us</div>
+    </>
+  );
 }
 
-export default ContactUs
+export default ContactUs;
