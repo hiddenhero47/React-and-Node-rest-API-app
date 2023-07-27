@@ -6,6 +6,7 @@ import { LogoText } from "../components/icons/appLogo";
 import MyVideo from "../pageComponents/home/video/homeVideo";
 import OurServices from "../components/services/services";
 import AboutUs from "../pageComponents/home/aboutInHome/about";
+import Testimony from "../pageComponents/home/myClient/clientSays"
 
 const TitleBerar = styled.div`
   width: 100%;
@@ -49,7 +50,7 @@ function Home() {
       <Style>
         <div className="titleEnd">
           <LogoText width={230} height={23} />
-          <span>Watch how we build your future today!</span>
+          <span className="welcome">Watch how we build your future today!</span>
         </div>
 
         <MyVideo />
@@ -59,6 +60,8 @@ function Home() {
         </div>
 
         <AboutUs />
+
+        <Testimony />
 
       </Style>
     </>

@@ -1,5 +1,14 @@
 import React from "react";
-import { Services, Gride } from "./services.style";
+import { Link, useNavigate } from "react-router-dom";
+import { Services, Gride, Box } from "./services.style";
+import {
+  Shape,
+  Ruler,
+  MeasuringTool,
+  Helmet,
+  Tools,
+  House,
+} from "../icons/servicesIcon";
 
 function OurServices() {
   return (
@@ -15,12 +24,89 @@ function OurServices() {
         </div>
 
         <Gride>
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
+          <Box>
+            <div className="boxBody">
+              <i>
+                <Shape width={38} height={38} />
+              </i>
+              <h5>General Contract</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
+
+          <Box>
+            <div className="boxBody">
+              <i>
+                <Ruler width={38} height={38} />
+              </i>
+              <h5>Project Planning</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
+
+          <Box>
+            <div className="boxBody">
+              <i>
+                <MeasuringTool width={38} height={38} />
+              </i>
+              <h5>Refurbishment</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
+
+          <Box>
+            <div className="boxBody">
+              <i>
+                <Helmet width={38} height={38} />
+              </i>
+              <h5>High Quality Build</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
+
+          <Box>
+            <div className="boxBody">
+              <i>
+                <Tools width={38} height={38} />
+              </i>
+              <h5>Service & maintenance</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
+
+          <Box>
+            <div className="boxBody">
+              <i>
+                <House width={38} height={38} />
+              </i>
+              <h5>House Extensions</h5>
+              <p>
+                Sagittis Nulla facilisi. In sed pretium metus. Proin pretium
+                Turna sit amet tincidunt.
+              </p>
+              <Link to="/contact-us">Read More</Link>
+            </div>
+          </Box>
         </Gride>
       </div>
     </Services>
