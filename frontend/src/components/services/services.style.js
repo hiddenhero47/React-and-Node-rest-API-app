@@ -59,7 +59,7 @@ export const Services = styled.div`
   }
 
   @media (min-width: 701px) and (max-width: 800px) {
-    height: 900px;
+    height: 1050px;
 
     .title {
       width: 100%;
@@ -72,7 +72,7 @@ export const Services = styled.div`
   }
 
   @media (min-width: 501px) and (max-width: 700px) {
-    height: 1500px;
+    height: 1720px;
 
     .title {
       width: 100%;
@@ -87,7 +87,7 @@ export const Services = styled.div`
   }
 
   @media (min-width: 401px) and (max-width: 500px) {
-    height: 1500px;
+    height: 1780px;
 
     .title {
       width: 100%;
@@ -102,7 +102,7 @@ export const Services = styled.div`
   }
 
   @media (max-width: 400px) {
-    height: 1500px;
+    height: 1780px;
 
     .title {
       width: 100%;
@@ -125,18 +125,58 @@ export const Gride = styled.div`
   column-gap: 2.1%;
   row-gap: 4%;
 
-  .box {
-    /* max-width: 32.2%; */
-    background: #151515;
-  }
-
-  @media (min-width: 500px) and (max-width: 800px) {
+  @media (min-width: 701px) and (max-width: 800px) {
+    height: 85%;
     grid-template-columns: 1fr 1fr;
   }
 
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
-    height: 90%;
+    height: 95%;
     row-gap: 1.5%;
+  }
+`;
+
+export const Box = styled.div`
+  min-height: 48%;
+  background: #151515;
+  padding: 30px 25px;
+
+  h5 {
+    margin: 0;
+    margin-top: 15px;
+    font-family: PoppinsBold;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    color: #f9c900;
+    white-space: nowrap;
+  }
+
+  p {
+    margin: 0;
+    margin-top: 10px;
+    font-family: Urbanist;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: #d2d2d2;
+    margin-bottom: 23px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    font-family: Urbanist;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 800px) {
+    min-height: unset;
   }
 `;

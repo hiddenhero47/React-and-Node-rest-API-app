@@ -12,11 +12,13 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/layout/headers/header";
 import Footer from "./components/layout/footers/footer";
+import ScrollToTop from "./components/layout/wrappers/ScrollToTop";
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <div className="containerBody">
           <Header />
           <Routes>

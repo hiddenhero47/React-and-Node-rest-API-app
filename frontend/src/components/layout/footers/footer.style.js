@@ -6,7 +6,7 @@ export const FooterStyle = styled.div`
   background-color: #151515;
   bottom: 0;
   color: #fff;
-  margin-top: 20vh;
+  margin-top: 34px;
 `;
 
 export const MainFooter = styled.div`
