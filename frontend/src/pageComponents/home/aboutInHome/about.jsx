@@ -33,7 +33,7 @@ function AboutUs() {
         </div>
       </InnerContainer>
       <span className="btn">
-        <Link to="/AboutUs">Learn More</Link>
+        <Link to="/about-us">Learn More</Link>
       </span>
     </Container>
   );

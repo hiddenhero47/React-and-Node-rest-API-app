@@ -12,7 +12,6 @@ import {
   Slide,
   SlideContent,
   Image,
-  ArrowButton,
   LeftArrow,
   RightArrow,
   Navigation,

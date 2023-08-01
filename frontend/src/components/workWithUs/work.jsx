@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, InnerContainer } from "./work.style";
 import Photo from "../../media/pictures/Photo.png";
 
@@ -33,7 +33,7 @@ function WorkWith() {
         </div>
       </InnerContainer>
       <span className="btn">
-        <Link to="/ContactUs">Contact Us</Link>
+        <Link to="/contact-us">Contact Us</Link>
       </span>
     </Container>
   );
