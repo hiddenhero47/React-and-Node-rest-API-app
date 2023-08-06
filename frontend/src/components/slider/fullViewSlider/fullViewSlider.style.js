@@ -1,31 +1,82 @@
 import styled from "styled-components";
 
+// width: ${(props) => props.width}px;
+
 export const SliderContainer = styled.div`
   position: relative;
   width: 100%;
+  height: 520px;
   overflow: hidden;
 `;
 
 export const Slider = styled.div`
-  display: flex;
-  /* width: ${(props) => props.width}px; */
+  display: inline-flex;
+  /* width: 100%; */
+  height: 100%;
   transform: translateX(${(props) => props.translate}px);
   transition: transform 0.5s ease;
 `;
 
 export const Slide = styled.div`
-  flex: 0 0 100%;
-  width: 100%;
+  /* flex: 0 0 100%; */
+  width: ${(props) => props.width}px;
+  height: 100%;
+  position: relative;
 `;
 
 export const SlideContent = styled.div`
   width: 100%;
   height: 100%;
+
+  .imageHolder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 2px;
+  }
 `;
 
 export const Image = styled.img`
+  /* width: 100%;
+  height: auto; */
   width: 100%;
-  height: auto;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  z-index: 5;
+`;
+
+export const Narration = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 22.2%;
+  top: 50%;
+  margin-top: -6%;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    width: 60%;
+    font-family: PoppinsBold;
+    font-size: 43px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 0em;
+    color: rgba(255, 255, 255, 1);
+  }
 `;
 
 export const ArrowButton = styled.button`
@@ -51,14 +102,21 @@ export const RightArrow = styled(ArrowButton)`
 export const Navigation = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  margin-top: -50px;
+  width: 100%;
 `;
 
 export const Bullet = styled.span`
-  width: 10px;
+  width: ${(props) => (props.$active === "true" ? "17" : "10")}px;
   height: 10px;
-  border-radius: 50%;
-  background-color: ${(props) => (props.$active === "true" ? "#222" : "gray")};
+  border-radius: ${(props) => (props.$active === "true" ? "20px" : "50px")};
+  background-color: ${(props) =>
+    props.$active === "true"
+      ? "rgba(255, 255, 255, 1)"
+      : "rgba(249, 201, 0, 1)"};
   margin: 0 5px;
   cursor: pointer;
+  transition: all 0.4s ease-in-out;
 `;
