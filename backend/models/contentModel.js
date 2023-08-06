@@ -19,7 +19,7 @@ const contentSchema = mongoose.Schema(
       unique: true,
     },
     description: {
-      type: mongoose.Schema.Types.Mixed,
+      type: String,
       required: [true, "Please add a description"],
     },
     type: {

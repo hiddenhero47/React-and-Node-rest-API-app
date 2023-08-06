@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderTitle from "../components/layout/headerTitle/myHeaderTitle";
+// import HeaderTitle from "../components/layout/headerTitle/myHeaderTitle";
 import SliderContainer from "../components/slider/fullViewSlider/fullViewSlider";
 import { LogoText } from "../components/icons/appLogo";
 import MyVideo from "../pageComponents/home/video/homeVideo";
@@ -44,7 +44,8 @@ function Home() {
   return (
     <>
       <TitleBerar>
-        <HeaderTitle page={"Home"} />
+        {/* <HeaderTitle page={"Home"} /> */}
+        <SliderContainer />
       </TitleBerar>
 
       <Style>
