@@ -22,6 +22,7 @@ export const Slide = styled.div`
   width: ${(props) => props.width}px;
   height: 100%;
   position: relative;
+  transition: transform 0.5s ease;
 `;
 
 export const SlideContent = styled.div`

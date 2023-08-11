@@ -2,7 +2,7 @@ import React from "react";
 import { NavStyle } from "./header.style";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useScreenSize } from "../../../appHelpers/screenSize";
+// import { useScreenSize } from "../../../appHelpers/screenSize";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../../features/auth/authSlice";
 import {
@@ -14,16 +14,16 @@ import {
 } from "../../icons/socialMedia";
 import { Logo, LogoText } from "../../icons/appLogo";
 import { Mail, Call } from "../../icons/mail&CallIcon";
+import { BiSolidDashboard } from "react-icons/bi";
 
 function Header() {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   const phoneNumber = "+01 569 896 654";
   const alink = "https://web.facebook.com/login/?_rdc=1&_rdr";
-  const screenSize = useScreenSize();
+  // const screenSize = useScreenSize();
 
   const onLogout = () => {
     dispatch(logout());
@@ -62,11 +62,18 @@ function Header() {
 
                 <ul className="nav-options login">
                   {user ? (
-                    <li className="list listTop">
-                      <button onClick={onLogout}>
-                        <FaSignOutAlt /> Logout
-                      </button>
-                    </li>
+                    <>
+                      <li className="list listTop">
+                        <button onClick={onLogout}>
+                          <FaSignOutAlt /> Logout
+                        </button>
+                      </li>
+                      <li className="list listTop">
+                        <Link className="exText" to="/dashboard">
+                          <BiSolidDashboard /> DashBoard
+                        </Link>
+                      </li>
+                    </>
                   ) : (
                     <>
                       <li className="list listTop">

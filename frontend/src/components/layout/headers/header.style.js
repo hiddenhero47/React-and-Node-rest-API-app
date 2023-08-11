@@ -173,6 +173,10 @@ export const NavStyle = styled.nav`
     font-family: Poppins;
   }
 
+  .listTop .exText {
+    font-size: 0.8rem !important;
+  }
+
   .listTop button {
     background-color: transparent;
     border: 0;
