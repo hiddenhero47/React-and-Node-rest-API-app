@@ -10,6 +10,10 @@ import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import DashboardGoals from "./pages/DashboardGoals";
+import DashboardUsers from "./pages/DashboardUserGoals";
+import DashboardUserGoals from "./pages/DashboardUserGoals";
+import DashboardContent from "./pages/DashboardContent";
 import Header from "./components/layout/headers/header";
 import Footer from "./components/layout/footers/footer";
 import ScrollToTop from "./components/layout/wrappers/ScrollToTop";
@@ -29,7 +33,12 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/goals" element={<DashboardGoals />} />
+            <Route path="/dashboard/users" element={<DashboardUsers />} />
+            <Route path="/dashboard/users/goals" element={<DashboardUserGoals />} />
+            <Route path="/dashboard/content" element={<DashboardContent />} />
           </Routes>
           <Footer />
         </div>
