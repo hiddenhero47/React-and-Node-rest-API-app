@@ -18,6 +18,9 @@ import { SliderData } from "./dummy";
 const content = SliderData ?? [];
 
 const ImageSlider = () => {
+  
+  const sliderRef = useRef(null);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -44,7 +47,14 @@ const ImageSlider = () => {
     setCurrentIndex(index);
   };
 
-  const sliderRef = useRef(null);
+  let NewDimensions = getElementDimensionsRef(sliderRef);
+
+  const [slideWidth, setSlideWidth] = useState(getElementDimensionsRef(sliderRef).width);
+
+  useEffect(() => {
+    setSlideWidth(getElementDimensionsRef(sliderRef).width);
+  }, [NewDimensions])
+  
 
   return (
     <>
@@ -59,7 +69,7 @@ const ImageSlider = () => {
             {content.map((element, index) => (
               <Slide
                 key={index}
-                width={getElementDimensionsRef(sliderRef).width}
+                width={slideWidth}
               >
                 <SlideContent>
                   <div className="imageHolder">
