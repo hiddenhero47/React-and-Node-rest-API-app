@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,9 @@ import { MyForm, FormControl } from "./loginForm.style";
 import { loginFormSchema } from "./validation";
 import { TriangleWarning as Warning } from "../../components/icons/warningSings";
 import { login, reset } from "../../features/auth/authSlice";
+import BubbleSlide from "../../components/loaders/bubbles/BubbleSlide";
 
 function LoginForm() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isLoading, isError, isSuccess, message } = useSelector(
@@ -34,24 +34,18 @@ function LoginForm() {
       email: values.email,
       password: values.password,
     };
-    dispatch(login (userData));
+    dispatch(login(userData));
   };
 
-  const {
-    values,
-    errors,
-    handleBlur,
-    touched,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: loginFormSchema,
-    onSubmit,
-  });
+  const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: loginFormSchema,
+      onSubmit,
+    });
 
   const { email, password } = values;
 
@@ -75,7 +69,9 @@ function LoginForm() {
           onChange={handleChange}
         />
         {touched.email && errors.email ? (
-          <p className="error"><Warning width={12} height={12} color="red"/> {errors.email}</p>
+          <p className="error">
+            <Warning width={12} height={12} color="red" /> {errors.email}
+          </p>
         ) : (
           ""
         )}
@@ -99,14 +95,22 @@ function LoginForm() {
           onChange={handleChange}
         />
         {touched.password && errors.password ? (
-          <p className="error"><Warning width={12} height={12} color="red"/> {errors.password}</p>
+          <p className="error">
+            <Warning width={12} height={12} color="red" /> {errors.password}
+          </p>
         ) : (
           ""
         )}
       </FormControl>
 
       <button disabled={isLoading} type="submit" className="submitBtn">
-        {isLoading ? <span>Loading...</span> : <span>Submit</span>}
+        {isLoading ? (
+          <span className="appLoader">
+            <BubbleSlide />
+          </span>
+        ) : (
+          <span>Submit</span>
+        )}
       </button>
     </MyForm>
   );

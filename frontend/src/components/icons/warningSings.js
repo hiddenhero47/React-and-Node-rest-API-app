@@ -5,13 +5,13 @@ export const TriangleWarning = ({ width, height, color, }) => (
     <IconContainer
         width={width}
         height={height}
-        color={color}
-        fill={color}
+        color={color || "currentColor"}
+        fill={color || "currentColor"}
         version="1.1"
         id="Capa_1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 492.426 492.426"
-        stroke={color}
+        stroke={color || "currentColor"}
     >
         <g id="SVGRepo_bgCarrier" strokeWidth="0" />
         <g

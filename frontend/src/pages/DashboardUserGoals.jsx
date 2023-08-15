@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import DashboardLayout from "../components/dashboardLayout/mainLayout/layout";
 
 function DashboardUserGoals() {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
   const [subPage, setSubPage] = useState("apple");
 
   const options = [
@@ -28,7 +40,7 @@ function DashboardUserGoals() {
       subPage={subPage}
       setSubPage={setSubPage}
     >
-      <div className="test">DashboardUserGoals</div>
+      <div className="test">Dashboard User Goals</div>
     </DashboardLayout>
   );
 }

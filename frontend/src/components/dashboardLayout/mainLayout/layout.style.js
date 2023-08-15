@@ -82,9 +82,10 @@ export const ChildContainer = styled.div`
 
 export const Child = styled.div`
   width: 90%;
-  height: auto;
+  height: 70%;
   min-height: 70%;
   background-color: #d9d9d9;
   border-radius: 20px;
   overflow: auto;
+  display: flex;
 `;

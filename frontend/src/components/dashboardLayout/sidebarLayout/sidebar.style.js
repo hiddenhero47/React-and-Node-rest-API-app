@@ -82,7 +82,7 @@ export const Container = styled.aside`
   .line {
     margin-top: 20px;
     width: 90%;
-    height: 3px;
+    height: 2px;
     border-radius: 20px;
     background-color: rgba(51, 51, 51, 0.4);
     backdrop-filter: blur(17px);

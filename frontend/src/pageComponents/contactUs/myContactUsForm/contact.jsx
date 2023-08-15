@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { Container, MyForm, FormControl } from "./contact.style";
 import { contactUsSchema } from "./validation";
 import { TriangleWarning as Warning } from "../../../components/icons/warningSings";
+import BubbleSlide from "../../../components/loaders/bubbles/BubbleSlide";
 
 function ContactForm() {
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (values) => {
     console.log(values);
+    setIsLoading(true);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoading]);
 
   const {
     // setErrors,
@@ -35,7 +47,7 @@ function ContactForm() {
   });
 
   const handlePhoneNumber = (event) => {
-    const inputValue = event.target.value.replace(/\D/g, ''); // Remove all non-numeric characters
+    const inputValue = event.target.value.replace(/\D/g, ""); // Remove all non-numeric characters
     setFieldValue("phoneNumber", inputValue);
   };
 
@@ -43,7 +55,6 @@ function ContactForm() {
   return (
     <Container>
       <MyForm onSubmit={handleSubmit}>
-
         <div className="inputFields">
           <div className="topFields">
             <div className="box">
@@ -88,7 +99,8 @@ function ContactForm() {
 
                 {touched.phoneNumber && errors.phoneNumber ? (
                   <p className="error">
-                    <Warning width={12} height={12} color="red" /> {errors.phoneNumber}
+                    <Warning width={12} height={12} color="red" />{" "}
+                    {errors.phoneNumber}
                   </p>
                 ) : (
                   ""
@@ -115,7 +127,8 @@ function ContactForm() {
 
                 {touched.email && errors.email ? (
                   <p className="error">
-                    <Warning width={12} height={12} color="red" /> {errors.email}
+                    <Warning width={12} height={12} color="red" />{" "}
+                    {errors.email}
                   </p>
                 ) : (
                   ""
@@ -140,7 +153,8 @@ function ContactForm() {
 
                 {touched.address && errors.address ? (
                   <p className="error">
-                    <Warning width={12} height={12} color="red" /> {errors.address}
+                    <Warning width={12} height={12} color="red" />{" "}
+                    {errors.address}
                   </p>
                 ) : (
                   ""
@@ -168,7 +182,8 @@ function ContactForm() {
 
               {touched.massage && errors.massage ? (
                 <p className="error">
-                  <Warning width={12} height={12} color="red" /> {errors.massage}
+                  <Warning width={12} height={12} color="red" />{" "}
+                  {errors.massage}
                 </p>
               ) : (
                 ""
@@ -178,9 +193,14 @@ function ContactForm() {
         </div>
 
         <button disabled={isLoading} type="submit" className="submitBtn">
-        {isLoading ? <span>Loading...</span> : <span>Send Message</span>}
-      </button>
-
+          {isLoading ? (
+            <span className="appLoader">
+              <BubbleSlide />
+            </span>
+          ) : (
+            <span>Send Message</span>
+          )}
+        </button>
       </MyForm>
     </Container>
   );

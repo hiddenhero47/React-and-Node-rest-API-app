@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import DashboardGoals from "./pages/DashboardGoals";
-import DashboardUsers from "./pages/DashboardUserGoals";
+import DashboardUsers from "./pages/DashboardUsers";
 import DashboardUserGoals from "./pages/DashboardUserGoals";
 import DashboardContent from "./pages/DashboardContent";
 import Header from "./components/layout/headers/header";

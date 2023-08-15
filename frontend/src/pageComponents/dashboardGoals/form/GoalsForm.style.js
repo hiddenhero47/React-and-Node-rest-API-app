@@ -1,8 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const MyForm = styled.form`
+export const FormWrapper = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin-top: 0;
+  }
+`;
+
+export const GoalForm = styled.form`
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #bfbfbf;
   padding: 20px;
 
   .submitBtn {
@@ -36,6 +50,7 @@ export const FormControl = styled.div`
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: #d9d9d9;
   }
 
   .myInput.isError {

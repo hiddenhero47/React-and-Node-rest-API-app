@@ -10,7 +10,7 @@ const Style = styled.div`
   align-items: center;
 
   .wordOne {
-    margin-top: 15%;
+    margin-top: 0%;
     font-family: Poppins;
     font-size: 50px;
     font-weight: 700;
@@ -32,8 +32,12 @@ function MyLooby() {
   const { user } = useSelector((state) => state.auth);
   return (
     <Style>
-      <span className="wordOne">{`Welcome to Dashboard ${user?.name}`}</span>
-      <span className="wordTwo">{`your an ${user?.role} user`}</span>
+      <span className="wordOne">{`Welcome to the Dashboard ${user?.name}`}</span>
+      <span className="wordTwo">
+        your
+        {user?.role === "admin" ? ` an ${user?.role} ` : ` a ${user?.role} `}
+        user
+      </span>
     </Style>
   );
 }
