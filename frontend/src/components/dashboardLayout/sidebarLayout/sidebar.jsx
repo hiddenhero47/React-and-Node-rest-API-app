@@ -49,18 +49,18 @@ function Side() {
         </li>
 
         <li className="options">
-          <Link to="/dashboard">
+          <Link to="/dashboard/goals">
             <div className="icon">
               <FaTasks />
             </div>
-            <span className="text">Set tasks</span>
+            <span className="text">Set goals</span>
           </Link>
         </li>
 
         {user?.role === ADMIN && (
           <>
             <li className="options">
-              <Link to="/dashboard">
+              <Link to="/dashboard/users">
                 <div className="icon">
                   <HiUsers />
                 </div>
@@ -69,16 +69,16 @@ function Side() {
             </li>
 
             <li className="options">
-              <Link to="/dashboard">
+              <Link to="/dashboard/users/goals">
                 <div className="icon">
                   <TbSubtask />
                 </div>
-                <span className="text">Users tasks</span>
+                <span className="text">Users Goals</span>
               </Link>
             </li>
 
             <li className="options">
-              <Link to="/dashboard">
+              <Link to="/dashboard/content">
                 <div className="icon">
                   <GrDocumentStore />
                 </div>

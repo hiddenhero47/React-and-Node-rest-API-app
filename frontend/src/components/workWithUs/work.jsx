@@ -9,7 +9,7 @@ function WorkWith() {
       <InnerContainer>
         <div className="imageContainer">
           <div className="imageHolder">
-            <img src={Photo} alt="no image" />
+            <img src={Photo} alt="" />
           </div>
         </div>
 

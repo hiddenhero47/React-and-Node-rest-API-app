@@ -58,6 +58,12 @@ export const MyForm = styled.form`
     border: none;
     border-radius: 2px;
     cursor: pointer;
+
+    .appLoader {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .submitBtn :hover {

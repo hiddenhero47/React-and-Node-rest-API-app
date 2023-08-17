@@ -7,9 +7,9 @@ import { MyForm, FormControl } from "./registrationForm.style";
 import { registrationSchema } from "./validation";
 import { TriangleWarning as Warning } from "../../components/icons/warningSings";
 import { register, reset } from "../../features/auth/authSlice";
+import BubbleSlide from "../../components/loaders/bubbles/BubbleSlide";
 
 function RegistrationForm() {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isLoading, isError, isSuccess, message } = useSelector(
@@ -173,7 +173,13 @@ function RegistrationForm() {
       </FormControl>
 
       <button disabled={isLoading} type="submit" className="submitBtn">
-        {isLoading ? <span>Loading...</span> : <span>Submit</span>}
+        {isLoading ? (
+          <span className="appLoader">
+            <BubbleSlide />
+          </span>
+        ) : (
+          <span>Submit</span>
+        )}
       </button>
     </MyForm>
   );

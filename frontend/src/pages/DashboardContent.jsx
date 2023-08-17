@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DashboardLayout from "../components/dashboardLayout/mainLayout/layout";
-import MyLooby from "../pageComponents/dashboard/looby";
 
-function Dashboard() {
+function DashboardContent() {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
@@ -35,16 +34,15 @@ function Dashboard() {
       keyword: "mango",
     },
   ];
-
   return (
     <DashboardLayout
       options={options}
       subPage={subPage}
       setSubPage={setSubPage}
     >
-      <MyLooby />
+      <div className="test">Dashboard Content</div>
     </DashboardLayout>
   );
 }
 
-export default Dashboard;
+export default DashboardContent;
