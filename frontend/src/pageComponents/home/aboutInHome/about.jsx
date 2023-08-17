@@ -9,7 +9,7 @@ function AboutUs() {
       <InnerContainer>
         <div className="imageContainer">
           <div className="imageHolder">
-            <img src={pexels} alt="no image" />
+            <img src={pexels} alt="" />
           </div>
         </div>
 

@@ -140,14 +140,14 @@ export const goalSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(editGoal.fulfilled, (state, action) => {
-        const updatedGoal = action.payload;
-        const updatedGoals = state.goals.map((goal) =>
-          goal._id === updatedGoal._id ? updatedGoal : goal
-        );
-        console.log(updatedGoals);
+        // const updatedGoal = action.payload;
+        // const updatedGoals = state.goals.map((goal) =>
+        //   goal._id === updatedGoal._id ? updatedGoal : goal
+        // );
+
         state.isLoading = false;
         state.isSuccess = true;
-        state.goals = updatedGoals;
+        state.goals.push(action.payload);;
       })
       .addCase(editGoal.rejected, (state, action) => {
         state.isLoading = false;

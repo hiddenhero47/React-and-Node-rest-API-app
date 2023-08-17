@@ -27,8 +27,6 @@ function GoalsForm({ setSubPage, setCurrentGoal, currentGoal }) {
       toast.error(message);
     }
 
-    console.log(goals);
-
     if (isSuccess && goals.length > 0) {
       toast.success("Successful");
       dispatch(setNeutral());

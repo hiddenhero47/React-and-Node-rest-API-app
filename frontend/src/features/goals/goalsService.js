@@ -44,6 +44,7 @@ const deleteGoal = async (goalId, token) => {
   return response.data;
 };
 
+// Edit goal
 const editGoal = async (goalId, goalData, token) => {
   const config = {
     headers: {

@@ -1,6 +1,6 @@
 import React from "react";
 import { FooterStyle, MainFooter } from "./footer.style";
-import { useScreenSize } from "../../../appHelpers/screenSize";
+// import { useScreenSize } from "../../../appHelpers/screenSize";
 import { Logo, LogoTextDark } from "../../icons/appLogo";
 import {
   InstagramCircle,
@@ -9,7 +9,7 @@ import {
 } from "../../icons/socialMedia";
 
 function Footer() {
-  const screenSize = useScreenSize();
+  // const screenSize = useScreenSize();
 
   return (
     <FooterStyle>
