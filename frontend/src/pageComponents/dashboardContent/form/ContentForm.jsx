@@ -13,7 +13,7 @@ import { ContentFormSchema } from "./validationSchema";
 import { toast } from "react-toastify";
 import BubbleSlide from "../../../components/loaders/bubbles/BubbleSlide";
 import ContentHooks from "../../../features/content/contentHooks";
-import { getErrorMessage } from "../../../appHelpers/utilsErrorUtils"
+import { getErrorMessage } from "../../../appHelpers/utilsErrorUtils";
 import { BsFillFileEarmarkImageFill as Img } from "react-icons/bs";
 import { BsFillFileEarmarkPlayFill as Mp4 } from "react-icons/bs";
 import { BsFillFileEarmarkXFill as Bad } from "react-icons/bs";
