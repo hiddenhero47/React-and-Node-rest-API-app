@@ -17,24 +17,7 @@ function Dashboard() {
 
   const [subPage, setSubPage] = useState("apple");
 
-  const options = [
-    {
-      name: "apple",
-      keyword: "apple",
-    },
-    {
-      name: "fish",
-      keyword: "fish",
-    },
-    {
-      name: "cake",
-      keyword: "cake",
-    },
-    {
-      name: "mango",
-      keyword: "mango",
-    },
-  ];
+  const options = [ ];
 
   return (
     <DashboardLayout

@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const PAGE = {
   ONE: "home",
-  TWO: "about",
+  TWO: "aboutUs",
+  THREE: "portfolio",
+  FOUR: "services",
+  FIVE: "contactUs",
 };
 
 const contentSchema = mongoose.Schema(
@@ -10,7 +13,7 @@ const contentSchema = mongoose.Schema(
     header: {
       type: String,
       default: PAGE.HOME,
-      enum: [PAGE.ONE, PAGE.TWO],
+      enum: [PAGE.ONE, PAGE.TWO, PAGE.THREE, PAGE.FOUR, PAGE.FIVE],
       required: [true, "Please select a page"],
     },
     title: {

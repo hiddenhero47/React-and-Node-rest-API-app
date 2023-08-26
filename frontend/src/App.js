@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
@@ -51,6 +52,7 @@ function App() {
           </div>
         </Router>
         <ToastContainer />
+        <ReactQueryDevtools initialIsOpen={false} position= "bottom-right"/>
       </QueryClientProvider>
     </>
   );

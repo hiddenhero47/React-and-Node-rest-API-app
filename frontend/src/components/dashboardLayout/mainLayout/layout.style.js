@@ -86,6 +86,6 @@ export const Child = styled.div`
   min-height: 70%;
   background-color: #d9d9d9;
   border-radius: 20px;
-  overflow: auto;
+  /* overflow: auto; */
   display: flex;
 `;

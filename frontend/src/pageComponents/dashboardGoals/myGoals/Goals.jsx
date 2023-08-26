@@ -23,12 +23,16 @@ function Goals({ setSubPage, setCurrentGoal, currentGoal }) {
       console.log(message);
     }
 
-    dispatch(getGoals());
-
     return () => {
       dispatch(reset());
     };
   }, [dispatch, isError, message]);
+
+  useEffect(() => {
+    dispatch(getGoals());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
 
   useEffect(() => {
     if (isSuccess && goals.length > 0) {

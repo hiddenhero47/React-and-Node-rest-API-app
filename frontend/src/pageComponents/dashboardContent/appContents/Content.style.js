@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-export const MyGoals = styled.div`
+export const MyContent = styled.div`
   width: 100%;
   height: auto;
   padding: 30px;
-  overflow: auto;
 
   .user_goals {
     width: 100%;
@@ -66,3 +65,56 @@ export const Grid = styled.div`
     }
   }
 `;
+
+export const Gallery = styled.div`
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .imageHolder {
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+
+    img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  }
+`;
+
+export const ArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+`;
+
+export const LeftArrow = styled(ArrowButton)`
+  left: 10px;
+`;
+
+export const RightArrow = styled(ArrowButton)`
+  right: 10px;
+`;
+
