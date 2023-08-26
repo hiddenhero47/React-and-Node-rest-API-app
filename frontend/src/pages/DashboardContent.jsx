@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DashboardLayout from "../components/dashboardLayout/mainLayout/layout";
+import Content from "../pageComponents/dashboardContent/appContents/Content";
+import ContentForm from "../pageComponents/dashboardContent/form/ContentForm";
 
 function DashboardContent() {
   const navigate = useNavigate();
@@ -14,24 +16,26 @@ function DashboardContent() {
     }
   }, [user, navigate]);
 
-  const [subPage, setSubPage] = useState("apple");
+  const [subPage, setSubPage] = useState("contents");
+
+  const [currentContent, setCurrentContent] = useState({});
+
+  const changeSubPage = (text) => {
+    setSubPage(text);
+  };
 
   const options = [
     {
-      name: "apple",
-      keyword: "apple",
+      name: "contents",
+      keyword: "contents",
     },
     {
-      name: "fish",
-      keyword: "fish",
+      name: "content form",
+      keyword: "contentForm",
     },
     {
-      name: "cake",
-      keyword: "cake",
-    },
-    {
-      name: "mango",
-      keyword: "mango",
+      name: "delete",
+      keyword: "delete",
     },
   ];
   return (
@@ -40,7 +44,21 @@ function DashboardContent() {
       subPage={subPage}
       setSubPage={setSubPage}
     >
-      <div className="test">Dashboard Content</div>
+      {subPage === "contents" && (
+        <Content
+          currentContent={currentContent}
+          setCurrentContent={setCurrentContent}
+          setSubPage={changeSubPage}
+        />
+      )}
+
+      {subPage === "contentForm" && (
+        <ContentForm
+          currentContent={currentContent}
+          setCurrentContent={setCurrentContent}
+          setSubPage={changeSubPage}
+        />
+      )}
     </DashboardLayout>
   );
 }

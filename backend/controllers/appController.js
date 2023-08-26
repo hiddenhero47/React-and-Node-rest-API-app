@@ -2,13 +2,17 @@ const asyncHandler = require("express-async-handler");
 const multer = require("multer");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
-const fs = require('fs');
+const fs = require("fs");
 const Goal = require("../models/goalsModel");
 const User = require("../models/userModel");
 const Content = require("../models/contentModel");
-const {arrangeContent, arrangeStoredContent, arrangeStoredUrl} = require("../helpers/arrangeData")
+const {
+  arrangeContent,
+  arrangeStoredContent,
+  arrangeStoredUrl,
+} = require("../helpers/arrangeData");
 
-// File Saving 
+// File Saving
 const saveFile = (file) => {
   let folder;
   if (file.mimetype.startsWith("image/")) {
@@ -18,6 +22,16 @@ const saveFile = (file) => {
   } else {
     folder = "./backend/public";
   }
+
+  let AppFolder;
+  if (file.mimetype.startsWith("image/")) {
+    AppFolder = "pictures";
+  } else if (file.mimetype.startsWith("video/")) {
+    AppFolder = "videos";
+  } else {
+    AppFolder = "";
+  }
+
   const fileId = uuidv4();
   const originalFileName = file.originalname;
   const extension = path.extname(originalFileName);
@@ -25,19 +39,20 @@ const saveFile = (file) => {
   const fileNameWithoutSpaces = fileNameWithoutExtension.replace(/\s+/g, "");
   const uniqueFileName = fileNameWithoutSpaces + "-" + fileId + extension;
 
-    const filePath = path.join(folder, uniqueFileName);
+  const filePath = path.join(folder, uniqueFileName);
+  const AppFilePath = path.join(AppFolder, uniqueFileName);
 
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
   return new Promise((resolve, reject) => {
-    fs.writeFile(filePath, file['buffer'], (err) => {
+    fs.writeFile(filePath, file["buffer"], (err) => {
       if (err) {
-        console.error('Error saving image:', err);
+        console.error("Error saving image:", err);
         reject(err);
       } else {
-        console.log('File saved successfully!');
-        resolve({ 
-          Url: `${process.env.BASE_URL}/${filePath}`,
+        console.log("File saved successfully!");
+        resolve({
+          Url: `${process.env.BASE_URL}/${AppFilePath}`,
           Path: filePath,
           FileName: uniqueFileName,
         });
@@ -60,23 +75,23 @@ const deleteFile = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.unlink(filePath, (err) => {
       if (err) {
-        console.error('Error deleting file:', err);
+        console.error("Error deleting file:", err);
         reject(err);
       }
-      console.log('File deleted successfully.');
+      console.log("File deleted successfully.");
       resolve(filePath);
     });
-  })
+  });
 };
 
 const deleteMultipleFiles = async (filePaths) => {
   const deletedFiles = [];
-    for (let i = 0; i < filePaths.length; i++) {
-      const filePath = filePaths[i];
-      const details = await deleteFile(filePath);
-      deletedFiles.push(details);
-    }
-    return filePaths;
+  for (let i = 0; i < filePaths.length; i++) {
+    const filePath = filePaths[i];
+    const details = await deleteFile(filePath);
+    deletedFiles.push(details);
+  }
+  return filePaths;
 };
 
 // @disc Get users
@@ -104,9 +119,13 @@ const updateUserRole = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  const updatedRole = await User.findByIdAndUpdate(req.params.id, {role: req.body.role}, {
-    new: true,
-  });
+  const updatedRole = await User.findByIdAndUpdate(
+    req.params.id,
+    { role: req.body.role },
+    {
+      new: true,
+    }
+  );
 
   res.status(200).json(updatedRole);
 });
@@ -129,7 +148,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const goals = await Goal.find({ user: user.id });
   if (goals) {
-    await Goal.deleteMany({user: req.params.id});
+    await Goal.deleteMany({ user: req.params.id });
   }
 
   await User.deleteOne(user);
@@ -186,7 +205,11 @@ const updateUserGoal = asyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .json({ UpdatedGoal: updatedGoal, UpdatedUser: goalUser, UpdatedBy: user.name });
+    .json({
+      UpdatedGoal: updatedGoal,
+      UpdatedUser: goalUser,
+      UpdatedBy: user.name,
+    });
 });
 
 // @disc Delete User Goals
@@ -237,10 +260,15 @@ const getContent = asyncHandler(async (req, res) => {
 // @route POST/api/app/content
 // @access Privet
 const setContent = asyncHandler(async (req, res) => {
-
   const { header, title, description, type, content } = req.body;
 
-  if (!header || !title || !description || !type || !content && req.files <= 0) {
+  if (
+    !header ||
+    !title ||
+    !description ||
+    !type ||
+    (!content && req.files <= 0)
+  ) {
     res.status(400);
     throw new Error("Missing required fields");
   }
@@ -254,7 +282,7 @@ const setContent = asyncHandler(async (req, res) => {
   }
 
   // Checking for content type error
-  if (type === "text" && !content || type !== "text" && req.files <= 0) {
+  if ((type === "text" && !content) || (type !== "text" && req.files <= 0)) {
     res.status(400);
     throw new Error("Wrong content type");
   }
@@ -263,9 +291,9 @@ const setContent = asyncHandler(async (req, res) => {
 
   if (type !== "text") {
     if (req.files.length > 1) {
-      fileData = await saveMultipleFiles(req.files)
+      fileData = await saveMultipleFiles(req.files);
     } else {
-      fileData = await saveFile(req.files[0])
+      fileData = await saveFile(req.files[0]);
     }
   }
 
@@ -277,7 +305,7 @@ const setContent = asyncHandler(async (req, res) => {
     content: type === "text" ? content : fileData,
   };
 
-  const saveContent = await Content.create(createContent)
+  const saveContent = await Content.create(createContent);
 
   if (createContent) {
     res.status(200).json(saveContent);
@@ -291,6 +319,11 @@ const setContent = asyncHandler(async (req, res) => {
 // @route PUT/api/app/content/:id
 // @access Privet
 const updateContent = asyncHandler(async (req, res) => {
+  if (!req.params.id || req.params.id === undefined) {
+    res.status(400);
+    throw new Error("No id");
+  }
+
   const findContentDB = await Content.findById(req.params.id);
 
   if (!findContentDB) {
@@ -301,7 +334,13 @@ const updateContent = asyncHandler(async (req, res) => {
 
   const { header, title, description, type, content } = req.body;
 
-  if (!header || !title || !description || !type || !content && req.files <= 0) {
+  if (
+    !header ||
+    !title ||
+    !description ||
+    !type ||
+    (!content && req.files <= 0)
+  ) {
     res.status(400);
     throw new Error("Missing required fields");
   }
@@ -314,25 +353,39 @@ const updateContent = asyncHandler(async (req, res) => {
   }
 
   // Check if content are the same
-  let ifTheSame = false; 
-  if (arrangeStoredUrl(findContentDB).content === content) {
-    ifTheSame = true;
+  let ifTheSame = false;
+  if (content) {
+    let mongoContent = arrangeStoredUrl(findContentDB).content;
+    let clientContent = Array.isArray(content) ? content : [content];
+
+    if (Array.isArray(mongoContent)) {
+      mongoContent = mongoContent.join(", ");
+    }
+
+    clientContent = clientContent.join(", ");
+
+    if (mongoContent === clientContent) {
+      ifTheSame = true;
+    }
   }
 
   // Checking for content type error
-  if (type === "text" && !content || type !== "text" && req.files <= 0 && !ifTheSame) {
+  if (
+    (type === "text" && !content) ||
+    (type !== "text" && req.files <= 0 && !ifTheSame)
+  ) {
     res.status(400);
     throw new Error("Wrong content type");
   }
 
   let NewContent;
   let deletedFile;
-  
-  if (type !== "text" && !req.files <= 0) {
+
+  if (type !== "text" && !req.files <= 0 && !ifTheSame) {
     if (req.files.length > 1) {
-      NewContent = await saveMultipleFiles(req.files)
+      NewContent = await saveMultipleFiles(req.files);
     } else {
-      NewContent = await saveFile(req.files[0])
+      NewContent = await saveFile(req.files[0]);
     }
     if (Array.isArray(contentDB.content)) {
       deletedFile = await deleteMultipleFiles(contentDB.content);
@@ -340,8 +393,8 @@ const updateContent = asyncHandler(async (req, res) => {
       deletedFile = await deleteFile(contentDB.content);
     }
   } else if (type === "text" && contentDB.type !== "text") {
-     NewContent = content;
-     if (Array.isArray(contentDB.content)) {
+    NewContent = content;
+    if (Array.isArray(contentDB.content)) {
       deletedFile = await deleteMultipleFiles(contentDB.content);
     } else {
       deletedFile = await deleteFile(contentDB.content);
@@ -358,9 +411,13 @@ const updateContent = asyncHandler(async (req, res) => {
     content: NewContent,
   };
 
-  const updatedContent = await Content.findByIdAndUpdate(req.params.id, UpdateContent, {
-    new: true,
-  });
+  const updatedContent = await Content.findByIdAndUpdate(
+    req.params.id,
+    UpdateContent,
+    {
+      new: true,
+    }
+  );
 
   res.status(200).json(updatedContent);
 });
@@ -401,5 +458,5 @@ module.exports = {
   getContent,
   setContent,
   updateContent,
-  deleteContent
+  deleteContent,
 };
