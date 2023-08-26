@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import DashboardLayout from "../components/dashboardLayout/mainLayout/layout";
 import Content from "../pageComponents/dashboardContent/appContents/Content";
 import ContentForm from "../pageComponents/dashboardContent/form/ContentForm";
+import DeleteContent from "../pageComponents/dashboardContent/deleteContent/DeleteContent";
 
 function DashboardContent() {
   const navigate = useNavigate();
@@ -54,6 +55,14 @@ function DashboardContent() {
 
       {subPage === "contentForm" && (
         <ContentForm
+          currentContent={currentContent}
+          setCurrentContent={setCurrentContent}
+          setSubPage={changeSubPage}
+        />
+      )}
+
+      {subPage === "delete" && (
+        <DeleteContent
           currentContent={currentContent}
           setCurrentContent={setCurrentContent}
           setSubPage={changeSubPage}

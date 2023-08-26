@@ -37,14 +37,14 @@ function Content({ setSubPage, setCurrentContent, currentContent }) {
   return (
     <MyContent>
       <h1>Content</h1>
-      <div className="user_goals">
+      <div className="user_content">
         {isLoading ? (
           <div className="AppLoader">
             <Candle />
           </div>
         ) : (
           <Container>
-            {data ? (
+            {data.length !== 0 ? (
               <Grid>
                 {data.map((content, index) => (
                   <div className="content" id={content?._id} key={index}>
@@ -79,7 +79,7 @@ function Content({ setSubPage, setCurrentContent, currentContent }) {
                 ))}
               </Grid>
             ) : (
-              ""
+              <div className="noData"> No Content </div>
             )}
           </Container>
         )}

@@ -5,7 +5,7 @@ export const MyContent = styled.div`
   height: auto;
   padding: 30px;
 
-  .user_goals {
+  .user_content {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -19,6 +19,14 @@ export const MyContent = styled.div`
       justify-content: center;
     }
   }
+
+  .noData {
+    font-family: Outfit;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-top: 13%;
+  }
 `;
 
 export const Container = styled.div`
@@ -27,6 +35,8 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   transition: all 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
 
   @media (min-width: 1131px) and (max-width: 1100px) {
    
