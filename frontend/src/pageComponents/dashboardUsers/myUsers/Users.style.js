@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const MyContent = styled.div`
+export const MyUsers = styled.div`
   width: 100%;
   height: auto;
   padding: 30px;
@@ -40,7 +40,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   @media (min-width: 1131px) and (max-width: 1100px) {
-   
   }
 `;
 
@@ -60,12 +59,22 @@ export const Grid = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #cccccc;
+    position: relative;
+  }
+
+  .text {
+    font-size: 15px;
+    font-family: Poppins;
+    margin-bottom: 5px;
+    color: rgba(16, 31, 61, 1);
   }
 
   .Textbox {
     padding: 10px;
   }
+`;
 
+export const Tooltip = styled.div`
   .btnBox {
     display: flex;
     gap: 60px;
@@ -77,55 +86,48 @@ export const Grid = styled.div`
   }
 `;
 
-export const Gallery = styled.div`
-  width: 500px;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+export const Menu = styled.div`
+  position: absolute;
+  width: 70%;
+  height: 60%;
+  padding: 5%;
+  z-index: 1;
+  left: 50%;
+  margin-left: -40%;
+  border-radius: 10px;
+  background-color: rgb(115, 115, 115, 0.6);
+  backdrop-filter: blur(8px);
+  --webkit-backdrop-filter: blur(8px);
 
-  .imageHolder {
-    width: 90%;
-    height: 90%;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.4s ease-in-out;
+  .close {
+    color: rgba(16, 31, 61, 1);
+    cursor: pointer;
+  }
 
-    img {
+  p {
+    font-family: Outfit;
+    font-size: 13px;
+    color: rgba(16, 31, 61, 1);
+  }
+
+  .submitBtn {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    padding: 7px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    .appLoader {
       width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      object-fit: cover;
-      pointer-events: none;
+      display: flex;
+      justify-content: center;
     }
   }
-`;
 
-export const ArrowButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #333;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  font-size: 30px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
+  .submitBtn :hover {
+    background-color: #45a049;
+  }
 `;
-
-export const LeftArrow = styled(ArrowButton)`
-  left: 10px;
-`;
-
-export const RightArrow = styled(ArrowButton)`
-  right: 10px;
-`;
-

@@ -133,8 +133,10 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
   const { header, title, description, type, content } = values;
 
   // File Uploader
-  const myFileRef = useRef(document.createElement("div"));
-  const inputRef = useRef(document.createElement("input"));
+  // const myFileRef = useRef(document.createElement("div"));
+  // const inputRef = useRef(document.createElement("input"));
+  const myFileRef = useRef(null);
+  const inputRef = useRef(null);
   const [fileSelected, setFileSelected] = useState(false);
 
   const handleDragover = (e) => {
