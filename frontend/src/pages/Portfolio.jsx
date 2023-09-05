@@ -68,15 +68,35 @@ const Style = styled.div`
     width: 100%;
   }
 
-  @media (min-width: 451px) and (max-width: 850px) {
+  @media (min-width: 801px) and (max-width: 850px) {
     .tab {
       width: 80%;
     }
   }
 
-  @media (max-width: 800px) {
+  @media (min-width: 501px) and (max-width: 800px) {
     .tab {
       width: 98%;
+    }
+  }
+
+  @media (min-width: 331px) and (max-width: 500px) {
+    .tab {
+      width: 98%;
+
+      .tabOptions {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
+    .tab {
+      width: 98%;
+
+      .tabOptions {
+        font-size: 14px;
+      }
     }
   }
 `;

@@ -354,7 +354,7 @@ const updateContent = asyncHandler(async (req, res) => {
 
   // Check if content are the same
   let ifTheSame = false;
-  if (content) {
+  if (content && type !== "text") {
     let mongoContent = arrangeStoredUrl(findContentDB).content;
     let clientContent = Array.isArray(content) ? content : [content];
 
@@ -448,6 +448,25 @@ const deleteContent = asyncHandler(async (req, res) => {
   res.status(200).json(`${contentDB.header} ${contentDB.title}`);
 });
 
+// @disc Get Content By SearchField
+// @route GET/api/app/content/:searchField
+// @access General
+const getContentBySearchField = asyncHandler(async (req, res) => {
+  const searchField = req.params.searchField;
+  const { searchString } = req.query.searchString;
+
+  const validFields = ["id", "header", "title"];
+  if (!validFields.includes(searchField)) {
+    res.status(400);
+    throw new Error("Unknown search field");
+  }
+
+  const query = searchField === "id" ? { _id: searchString } : { [searchField]: searchString };
+  const content = await Content.find(query);
+
+  res.status(200).json(content.length > 0 ? arrangeContent(content) : content);
+});
+
 module.exports = {
   getUsers,
   updateUserRole,
@@ -459,4 +478,5 @@ module.exports = {
   setContent,
   updateContent,
   deleteContent,
+  getContentBySearchField,
 };

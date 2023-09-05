@@ -25,4 +25,10 @@ export const Container = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
   }
+
+  @media (max-width: 500px) {
+    .title {
+      font-size: 40px;
+    }
+  }
 `;

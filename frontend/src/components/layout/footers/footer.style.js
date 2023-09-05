@@ -7,6 +7,10 @@ export const FooterStyle = styled.footer`
   bottom: 0;
   color: #fff;
   margin-top: 34px;
+
+  @media (max-width: 450px) {
+    height: 650px;
+  }
 `;
 
 export const MainFooter = styled.div`
@@ -110,5 +114,127 @@ export const MainFooter = styled.div`
     font-weight: 400;
     line-height: 26px;
     letter-spacing: 0em;
+  }
+
+  @media (min-width: 601px) and (max-width: 800px) {
+    .container {
+      width: 90%;
+    }
+  }
+
+  @media (min-width: 501px) and (max-width: 601px) {
+    .container {
+      width: 95%;
+    }
+
+    .innerBoxOne {
+      flex: 2;
+    }
+
+    .innerBoxTwo {
+      flex: 2;
+    }
+
+    .innerBoxThree {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: 451px) and (max-width: 500px) {
+    .container {
+      width: 95%;
+    }
+
+    .innerBoxOne {
+      flex: 2;
+    }
+
+    .innerBoxTwo {
+      flex: 2;
+    }
+
+    .innerBoxThree {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: 371px) and (max-width: 450px) {
+    .container {
+      width: 95%;
+      height: 90%;
+    }
+
+    .icon {
+      margin-top: 30px;
+    }
+
+    .fieldBox {
+      height: 80%;
+    }
+
+    .innerBoxWrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 5%;
+    }
+
+    .innerBoxOne {
+      flex: unset;
+      width: 60%;
+    }
+
+    .innerBoxTwo {
+      flex: unset;
+      width: 60%;
+      border-left: 0px;
+      border-right: 0px;
+      justify-content: space-between;
+    }
+
+    .innerBoxThree {
+      flex: unset;
+      width: 60%;
+      justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 201px) and (max-width: 370px) {
+    .container {
+      width: 95%;
+      height: 90%;
+    }
+
+    .icon {
+      margin-top: 30px;
+    }
+
+    .fieldBox {
+      height: 80%;
+    }
+
+    .innerBoxWrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 5%;
+    }
+
+    .innerBoxOne {
+      flex: unset;
+      width: 70%;
+    }
+
+    .innerBoxTwo {
+      flex: unset;
+      width: 70%;
+      border-left: 0px;
+      border-right: 0px;
+      justify-content: space-between;
+    }
+
+    .innerBoxThree {
+      flex: unset;
+      width: 70%;
+      justify-content: flex-start;
+    }
   }
 `;

@@ -7,6 +7,7 @@ import MyVideo from "../pageComponents/home/video/homeVideo";
 import OurServices from "../components/services/services";
 import AboutUs from "../pageComponents/home/aboutInHome/about";
 import Testimony from "../pageComponents/home/myClient/clientSays"
+import AppHooks from '../features/myApp/appHooks'
 
 const TitleBerar = styled.div`
   width: 100%;
@@ -41,6 +42,10 @@ const Style = styled.div`
 `;
 
 function Home() {
+  const searchField = "header";
+  const searchString = {searchString: "home"};
+  const {data} = AppHooks.receive({ searchField, searchString });
+  console.log(data);
   return (
     <>
       <TitleBerar>

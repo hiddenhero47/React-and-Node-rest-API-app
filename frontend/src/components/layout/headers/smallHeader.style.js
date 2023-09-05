@@ -9,6 +9,12 @@ export const NavStyle = styled.nav`
   background-color: #fff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.311);
 
+  .logo_small {
+    display: inline;
+    white-space: nowrap;
+    align-items: center;
+  }
+
   .navBody {
     position: relative;
     width: 100%;
@@ -39,6 +45,16 @@ export const NavStyle = styled.nav`
       }
       .end {
         justify-content: end;
+        gap: 10%;
+      }
+    }
+
+    @media (min-width: 501px) and (max-width: 834px) {
+      .navBox {
+        .end {
+          gap: 20%;
+          justify-content: center;
+        }
       }
     }
   }
@@ -63,6 +79,7 @@ export const NavStyle = styled.nav`
       gap: 17px;
       margin-top: 0.5%;
       margin-left: auto;
+      margin-right: auto;
     }
 
     .timeText {
@@ -90,8 +107,10 @@ export const NavStyle = styled.nav`
     align-items: center;
 
     .nav-options {
-      width: 61%;
+      width: 100%;
       justify-content: space-between;
+      display: flex;
+      justify-content: space-around;
     }
 
     .navBox {
@@ -216,7 +235,7 @@ export const NavStyle = styled.nav`
   }
 
   .middle {
-    width: 50%;
+    max-width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,13 +249,13 @@ export const NavStyle = styled.nav`
       }
     }
     .navBottom {
-    width: 80%;
-    left: 50%;
-    margin-left: -40%;
+      width: 80%;
+      left: 50%;
+      margin-left: -40%;
     }
   }
 
-  @media (min-width: 500px) and (max-width: 834px) {
+  @media (min-width: 501px) and (max-width: 834px) {
     .navTop {
       .navBox {
         width: 95%;
@@ -244,9 +263,53 @@ export const NavStyle = styled.nav`
       }
     }
     .navBottom {
-    width: 95%;
-    left: 50%;
-    margin-left: -47.5%;
+      width: 95%;
+      left: 50%;
+      margin-left: -47.5%;
+    }
+  }
+
+  @media (min-width: 366px) and (max-width: 500px) {
+    .navTop {
+      .navBox {
+        width: 95%;
+        margin-left: 0;
+      }
+    }
+    .navBottom {
+      width: 95%;
+      left: 50%;
+      margin-left: -47.5%;
+    }
+
+    .boxHeader {
+      .timeText {
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media (max-width: 365px) {
+    .navTop {
+      .navBox {
+        width: 95%;
+        margin-left: 0;
+      }
+    }
+    .navBottom {
+      width: 95%;
+      left: 50%;
+      margin-left: -47.5%;
+    }
+
+    .boxHeader {
+      .timeText {
+        font-size: 12px;
+      }
+    }
+
+    .list a {
+      font-size: 4vw;
     }
   }
 `;
