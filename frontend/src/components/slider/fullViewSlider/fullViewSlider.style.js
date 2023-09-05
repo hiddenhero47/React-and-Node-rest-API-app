@@ -78,6 +78,32 @@ export const Narration = styled.div`
     letter-spacing: 0em;
     color: rgba(255, 255, 255, 1);
   }
+
+  @media (min-width: 901px) and (max-width: 1000px) {
+    span {
+      font-size: 38px;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 901px) {
+    span {
+      font-size: 33px;
+    }
+  }
+
+  @media (min-width: 401px) and (max-width: 600px) {
+    span {
+      font-size: 30px;
+      line-height: 50px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    span {
+      font-size: 6vw;
+      line-height: 40px;
+    }
+  }
 `;
 
 export const ArrowButton = styled.button`

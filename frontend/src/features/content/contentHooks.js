@@ -9,7 +9,6 @@ const useGetContentQuery = () => {
     ["content/get", token],
     () => contentService.getContent(token),
     {
-      enabled: !!token,
       onSuccess: (data) => {
         console.log("Data fetched successfully:", data);
       },

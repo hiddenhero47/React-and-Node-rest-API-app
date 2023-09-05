@@ -11,7 +11,7 @@ const {
     setContent,
     deleteContent,
     updateContent,
-    // getContentByTitle,
+    getContentBySearchField,
 } = require("../controllers/appController");
 const {secureRole} = require('../middleware/authMiddleware');
 
@@ -24,6 +24,6 @@ router.route("/users/goals/:id").put(secureRole("admin"), updateUserGoal).delete
 // Content Management
 router.route("/content").get(getContent).post(secureRole("admin"), setContent);
 router.route("/content/:id").delete(secureRole("admin"), deleteContent).put(secureRole("admin"), updateContent);
-// router.route("/content/:title").get(getContentByTitle);
+router.route("/content/:searchField").get(getContentBySearchField);
 
 module.exports = router;
