@@ -96,29 +96,51 @@ export const NoImage = styled.div`
 `;
 
 export const Gallery = styled.div`
-  width: 500px;
-  height: 500px;
+  width: 80vw;
+  height: 80vh;
+  background-color: rgb(23, 23, 23, 0.98);
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.311);
 
   .imageHolder {
-    width: 90%;
+    display: flex;
+    justify-content: center;
+    width: 80%;
     height: 90%;
+    border-radius: 5px;
     overflow: hidden;
     position: relative;
     transition: all 0.4s ease-in-out;
 
     img {
-      width: 100%;
+      /* width: 100%; */
       height: 100%;
-      position: absolute;
+      border-radius: 5px;
+      /* position: absolute;
       left: 0;
-      top: 0;
+      top: 0; */
       object-fit: cover;
       pointer-events: none;
     }
+  }
+
+  @media (min-width: 741px) and (max-width: 800px) {
+   height: 70vh;
+   width: 75vw;
+  }
+
+  @media (min-width: 601px) and (max-width: 740px) {
+   height: 70vh;
+   width: 90vw;
+  }
+
+  @media (max-width: 600px) {
+   height: 60vh;
+   width: 98vw;
   }
 `;
 
@@ -137,6 +159,7 @@ export const ArrowButton = styled.button`
   align-items: center;
   width: 50px;
   height: 50px;
+  border-radius: 10px;
 `;
 
 export const LeftArrow = styled(ArrowButton)`

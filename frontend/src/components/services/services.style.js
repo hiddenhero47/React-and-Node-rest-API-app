@@ -111,7 +111,7 @@ export const Services = styled.div`
 
     .service {
       margin-top: 13%;
-      width: 73%;
+      width: 86%;
       height: 90%;
     }
   }

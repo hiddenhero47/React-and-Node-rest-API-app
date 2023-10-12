@@ -260,7 +260,7 @@ const getContent = asyncHandler(async (req, res) => {
 // @route POST/api/app/content
 // @access Privet
 const setContent = asyncHandler(async (req, res) => {
-  const { header, title, description, type, content } = req.body;
+  const { header, title, description, type, content, tags } = req.body;
 
   if (
     !header ||
@@ -297,12 +297,21 @@ const setContent = asyncHandler(async (req, res) => {
     }
   }
 
+  // Parse the tags string back into an object
+  let parsedTags;
+  try {
+    parsedTags = JSON.parse(tags);
+  } catch (err) {
+    parsedTags = null; // Handle any parsing errors
+  }
+
   const createContent = {
     header,
     title,
     description,
     type,
     content: type === "text" ? content : fileData,
+    tags: parsedTags,
   };
 
   const saveContent = await Content.create(createContent);
@@ -332,7 +341,7 @@ const updateContent = asyncHandler(async (req, res) => {
   }
   const contentDB = arrangeStoredContent(findContentDB);
 
-  const { header, title, description, type, content } = req.body;
+  const { header, title, description, type, content, tags } = req.body;
 
   if (
     !header ||
@@ -403,12 +412,21 @@ const updateContent = asyncHandler(async (req, res) => {
     NewContent = content;
   }
 
+  // Parse the tags string back into an object
+  let parsedTags;
+  try {
+    parsedTags = JSON.parse(tags);
+  } catch (err) {
+    parsedTags = null; // Handle any parsing errors
+  }
+
   const UpdateContent = {
     header,
     title,
     description,
     type,
     content: NewContent,
+    tags: parsedTags,
   };
 
   const updatedContent = await Content.findByIdAndUpdate(

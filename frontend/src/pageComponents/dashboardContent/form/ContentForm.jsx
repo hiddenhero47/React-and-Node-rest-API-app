@@ -7,6 +7,7 @@ import {
   FormControl,
   Radio,
   File,
+  ButtonGrid,
 } from "./ContentForm.style";
 import { TriangleWarning as Warning } from "../../../components/icons/warningSings";
 import { ContentFormSchema } from "./validationSchema";
@@ -18,6 +19,9 @@ import { BsFillFileEarmarkImageFill as Img } from "react-icons/bs";
 import { BsFillFileEarmarkPlayFill as Mp4 } from "react-icons/bs";
 import { BsFillFileEarmarkXFill as Bad } from "react-icons/bs";
 import { BsFillFileEarmarkCheckFill as Good } from "react-icons/bs";
+import { PAGES } from "./selectValues";
+import CustomSelect from "../../../components/formComponents/CustomSelect";
+import { numberToWords } from "../../../appHelpers/basicFunctions";
 
 function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
   const {
@@ -60,7 +64,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
     } else if (isError) {
       toast.error(getErrorMessage(error) || "Network Error");
     } else if (isErrorX) {
-      toast.error(getErrorMessage(errorX)|| "Network Error");
+      toast.error(getErrorMessage(errorX) || "Network Error");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, errorX, isError, isErrorX, isSuccess, isSuccessX]);
@@ -71,6 +75,10 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("type", values.type);
+    if (Object.keys(values.tags).length !== 0) {
+      const tagsJSON = JSON.stringify(values.tags);
+      formData.append("tags", tagsJSON);
+    }
 
     if (Array.isArray(values.content)) {
       for (let i = 0; i < values.content.length; i++) {
@@ -83,7 +91,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
 
     if (Object.keys(state).length !== 0) {
       const ContentId = state?._id;
-      Update({ContentId, ContentData: formData});
+      Update({ ContentId, ContentData: formData });
     } else {
       create(formData);
     }
@@ -107,6 +115,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
       description: "",
       type: "text",
       content: "",
+      tags: {},
     },
     validationSchema: ContentFormSchema,
     onSubmit,
@@ -120,6 +129,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
         description: state?.description,
         type: state?.type,
         content: state?.content,
+        tags: state?.tags ? state?.tags : {},
       };
 
       if (state?.type !== "text") {
@@ -127,10 +137,28 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
       }
 
       setValues(Content);
+
+      if (state?.tags) {
+        setTagNos(Object.keys(state?.tags).length);
+      }
     }
   }, [state, setValues]);
 
-  const { header, title, description, type, content } = values;
+  const { header, title, description, type, content, tags } = values;
+
+  // Tag Functions
+  const [tagNos, setTagNos] = useState(0);
+
+  const handleAddTag = ({ tagValue, tagEvent }) => {
+    setFieldValue("tags", { ...tags, [tagValue]: tagEvent.target.value });
+  };
+
+  const handleRemoveTag = (tagKey) => {
+    const newTags = { ...values.tags };
+    delete newTags[tagKey];
+    setFieldValue("tags", newTags);
+    setTagNos(tagNos - 1);
+  };
 
   // File Uploader
   // const myFileRef = useRef(document.createElement("div"));
@@ -202,25 +230,18 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
             Header*
           </label>
 
-          <input
-            type="text"
+          <CustomSelect
+            options={PAGES}
             name="header"
             id="header"
-            className={
-              touched.text && errors.text ? "myInput isError" : "myInput"
-            }
             onBlur={handleBlur}
             value={header || ""}
-            placeholder=" Enter text"
-            onChange={handleChange}
+            placeholder=" Select Page"
+            onChange={(value) => setFieldValue("header", value)}
+            isError={touched.header && errors.header ? true : false}
+            errorMessage={errors.header}
+            background="#d9d9d9"
           />
-          {touched.header && errors.header ? (
-            <p className="error">
-              <Warning width={12} height={12} color="red" /> {errors.header}
-            </p>
-          ) : (
-            ""
-          )}
         </FormControl>
 
         <FormControl>
@@ -233,7 +254,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
             name="title"
             id="title"
             className={
-              touched.text && errors.text ? "myInput isError" : "myInput"
+              touched.title && errors.title ? "myInput isError" : "myInput"
             }
             onBlur={handleBlur}
             value={title || ""}
@@ -381,7 +402,7 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
                     <Good />
                   </i>
                   <span className="text">{`Number of content ${
-                    content.length ?? 0
+                    Array.isArray(content) ? content.length : typeof content === 'string' ? 1 : 0
                   }`}</span>
                 </div>
                 <div className="clear" onClick={handelClear}>
@@ -422,6 +443,49 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
             )}
           </FormControl>
         )}
+
+        <ButtonGrid>
+          <button
+            type="button"
+            onClick={() => setTagNos(tagNos + 1)}
+            disabled={tagNos >= 9}
+            className="grid-item"
+          >
+            + Add Tag
+          </button>
+          <button
+            type="button"
+            onClick={() => handleRemoveTag(`tag${tagNos}`)}
+            disabled={tagNos <= 0}
+            className="grid-item"
+          >
+            - Remove Tag
+          </button>
+        </ButtonGrid>
+
+        {tagNos >= 1 &&
+          Array.from({ length: tagNos }).map((_, index) => (
+            <FormControl key={index}>
+              <label htmlFor="text" className="myLabel">
+                Tag {numberToWords(index + 1)}*
+              </label>
+
+              <input
+                type="text"
+                name="tags"
+                id="tags"
+                className={
+                  touched.tags && errors.tags ? "myInput isError" : "myInput"
+                }
+                onBlur={handleBlur}
+                value={tags[`tag${index + 1}`] || ""}
+                placeholder=" Enter text"
+                onChange={(e) =>
+                  handleAddTag({ tagValue: `tag${index + 1}`, tagEvent: e })
+                }
+              />
+            </FormControl>
+          ))}
 
         <button
           disabled={isLoading || isLoadingX}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Model from "../../../components/appModals/normalModel/yourModel";
 import { Gallery, LeftArrow, RightArrow} from "./Content.style";
 
@@ -18,6 +18,11 @@ export function Showcase({ visible, onCancel, images }) {
        setCurrent(next);
     }
   };
+
+  useEffect(() => {
+    setCurrent(0)
+  }, [images])
+  
 
   return (
     <Model visible={visible} onCancel={onCancel}>

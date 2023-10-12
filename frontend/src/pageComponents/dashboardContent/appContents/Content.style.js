@@ -21,6 +21,14 @@ export const MyContent = styled.div`
     }
   }
 
+  .gridBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-bottom: 30px;
+  }
+
   .noData {
     font-family: Outfit;
     font-size: 30px;
@@ -78,29 +86,51 @@ export const Grid = styled.div`
 `;
 
 export const Gallery = styled.div`
-  width: 500px;
-  height: 500px;
+  width: 80vw;
+  height: 80vh;
+  background-color: rgb(23, 23, 23, 0.98);
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.311);
 
   .imageHolder {
-    width: 90%;
+    display: flex;
+    justify-content: center;
+    width: 80%;
     height: 90%;
+    border-radius: 5px;
     overflow: hidden;
     position: relative;
     transition: all 0.4s ease-in-out;
 
     img {
-      width: 100%;
+      /* width: 100%; */
       height: 100%;
-      position: absolute;
+      border-radius: 5px;
+      /* position: absolute;
       left: 0;
-      top: 0;
+      top: 0; */
       object-fit: cover;
       pointer-events: none;
     }
+  }
+
+  @media (min-width: 741px) and (max-width: 800px) {
+   height: 70vh;
+   width: 75vw;
+  }
+
+  @media (min-width: 601px) and (max-width: 740px) {
+   height: 70vh;
+   width: 90vw;
+  }
+
+  @media (max-width: 600px) {
+   height: 60vh;
+   width: 98vw;
   }
 `;
 
@@ -119,6 +149,7 @@ export const ArrowButton = styled.button`
   align-items: center;
   width: 50px;
   height: 50px;
+  border-radius: 10px;
 `;
 
 export const LeftArrow = styled(ArrowButton)`
@@ -129,3 +160,33 @@ export const RightArrow = styled(ArrowButton)`
   right: 10px;
 `;
 
+export const ButtonGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-auto-rows: auto;
+  justify-content: space-between;
+  grid-auto-flow: dense;
+  column-gap: 30px;
+  row-gap: 20px;
+
+  .grid-item {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Outfit;
+    height: 100%;
+    background-color: rgba(16, 31, 61, 0.789);
+    color: white;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      box-shadow: 0px 0px 15px rgba(38, 38, 38, 0.611);
+    }
+}
+
+`;

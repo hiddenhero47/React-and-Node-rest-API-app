@@ -121,8 +121,36 @@ export const ClientTestimony = styled.div`
     }
   }
 
-  @media (max-width: 400px) {
+  @media (min-width: 340px) and (max-width: 400px) {
     height: 1800px;
+
+    .title {
+      width: 100%;
+      height: 10%;
+    }
+
+    .Testimony {
+      width: 80%;
+      height: 95%;
+    }
+  }
+
+  @media (min-width: 304px) and (max-width: 339px) {
+    height: 1900px;
+
+    .title {
+      width: 100%;
+      height: 10%;
+    }
+
+    .Testimony {
+      width: 80%;
+      height: 95%;
+    }
+  }
+
+  @media (max-width: 303px) {
+    height: 2200px;
 
     .title {
       width: 100%;
