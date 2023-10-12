@@ -14,6 +14,39 @@ export const FormWrapper = styled.div`
   }
 `;
 
+export const ButtonGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  grid-auto-rows: auto;
+  justify-content: space-between;
+  grid-auto-flow: dense;
+  column-gap: 60px;
+  row-gap: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  .grid-item {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Outfit;
+    height: 100%;
+    background-color: rgba(16, 31, 61, 0.789);
+    color: white;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      box-shadow: 0px 0px 15px rgba(38, 38, 38, 0.611);
+    }
+}
+
+`;
+
 export const Form = styled.form`
   border-radius: 5px;
   background-color: #bfbfbf;

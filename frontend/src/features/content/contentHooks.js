@@ -10,7 +10,7 @@ const useGetContentQuery = () => {
     () => contentService.getContent(token),
     {
       onSuccess: (data) => {
-        console.log("Data fetched successfully:", data);
+        // console.log("Data fetched successfully:", data);
       },
       refetchOnWindowFocus: false,
     }

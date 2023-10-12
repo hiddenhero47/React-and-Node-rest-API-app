@@ -35,6 +35,9 @@ const contentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.Mixed,
       required: [true, "Please add content"],
     },
+    tags: {
+      type: Object,
+    },
   },
   {
     timestamps: true,
