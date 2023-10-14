@@ -9,7 +9,7 @@ const useGetContentQuery = ({ searchField, searchString }) => {
     () => appServices.getContentBysearchField({ searchField, searchString }),
     {
       onSuccess: (data) => {
-        console.log("Data fetched successfully:", data);
+        // console.log("Data fetched successfully:", data);
       },
       refetchOnWindowFocus: false,
     }

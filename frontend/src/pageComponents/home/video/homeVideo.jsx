@@ -6,7 +6,7 @@ import HomeVideo from "../../../media/video/Wake up to Reality - Madara Uchiha's
 import Placeholder from "../../../media/pictures/img.jpg";
 import { AppPlayIcon } from "../../../components/icons/media";
 
-function MyVideo() {
+function MyVideo({AppVideo, isLoading, holder}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoToggle, setVideoToggle] = useState(false);
   const videoRef = useRef(null);
@@ -34,7 +34,7 @@ function MyVideo() {
             controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
             poster={Placeholder}
           >
-            <source src={HomeVideo} type="video/mp4" />
+            <source src={AppVideo ?? HomeVideo} type="video/mp4" />
           </Video>
         </div>
       ) : (

@@ -6,8 +6,9 @@ import { LogoText } from "../components/icons/appLogo";
 import MyVideo from "../pageComponents/home/video/homeVideo";
 import OurServices from "../components/services/services";
 import AboutUs from "../pageComponents/home/aboutInHome/about";
-import Testimony from "../pageComponents/home/myClient/clientSays"
-import AppHooks from '../features/myApp/appHooks'
+import Testimony from "../pageComponents/home/myClient/clientSays";
+import AppHooks from "../features/myApp/appHooks";
+import { GrabMe, GiveMeSliderData } from "../appHelpers/basicFunctions";
 
 const TitleBerar = styled.div`
   width: 100%;
@@ -42,15 +43,25 @@ const Style = styled.div`
 `;
 
 function Home() {
+  const PAGE = {
+    ONE: "home",
+    TWO: "aboutUs",
+    THREE: "portfolio",
+    FOUR: "services",
+    FIVE: "contactUs",
+  };
+
   const searchField = "header";
-  const searchString = {searchString: "home"};
-  const {data} = AppHooks.receive({ searchField, searchString });
-  console.log(data);
+  const searchString = { searchString: PAGE.ONE };
+  const { data, isLoading } = AppHooks.receive({ searchField, searchString });
   return (
     <>
       <TitleBerar>
         {/* <HeaderTitle page={"Home"} /> */}
-        <SliderContainer />
+        <SliderContainer
+          AppSliderData={GiveMeSliderData(GrabMe(data, "homeSliderOne"))}
+          isLoading={isLoading}
+        />
       </TitleBerar>
 
       <Style>
@@ -59,7 +70,10 @@ function Home() {
           <span className="welcome">Watch how we build your future today!</span>
         </div>
 
-        <MyVideo />
+        <MyVideo
+          AppVideo={GrabMe(data, "homeVideoOne")?.content}
+          isLoading={isLoading}
+        />
 
         <div className="our-services">
           <OurServices />
@@ -68,7 +82,6 @@ function Home() {
         <AboutUs />
 
         <Testimony />
-
       </Style>
     </>
   );

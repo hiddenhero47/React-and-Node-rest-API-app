@@ -12,12 +12,14 @@ import {
   Bullet,
   Overlay,
   Narration,
+  Loader,
 } from "./fullViewSlider.style";
 import { SliderData } from "./dummy";
+import Spinner from "../../loaders/spinners/Spinner";
 
-const content = SliderData ?? [];
+const ImageSlider = ({AppSliderData, isLoading}) => {
 
-const ImageSlider = () => {
+  const content = AppSliderData ?? SliderData;
   
   const sliderRef = useRef(null);
 
@@ -31,7 +33,7 @@ const ImageSlider = () => {
     return () => {
       clearTimeout(slideShowTimer);
     };
-  }, [currentIndex]);
+  }, [content.length, currentIndex]);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -58,8 +60,10 @@ const ImageSlider = () => {
 
   return (
     <>
-      {content.length <= 0 ? (
-        ""
+      {isLoading ? (
+        <Loader>
+          <Spinner />
+        </Loader>
       ) : (
         <SliderContainer ref={sliderRef}>
           <Slider

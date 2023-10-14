@@ -147,3 +147,12 @@ export const Bullet = styled.span`
   cursor: pointer;
   transition: all 0.4s ease-in-out;
 `;
+
+export const Loader = styled.div`
+  width: 100%;
+  height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
