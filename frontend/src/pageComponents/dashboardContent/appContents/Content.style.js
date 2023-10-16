@@ -72,6 +72,29 @@ export const Grid = styled.div`
 
   .Textbox {
     padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #171717;
+    margin: 0;
+  }
+
+  .imageContainer {
+  }
+
+  .imageHolder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      object-fit: cover;
+    }
   }
 
   .btnBox {

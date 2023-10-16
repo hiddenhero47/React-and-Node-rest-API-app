@@ -14,3 +14,8 @@ First, run the backend server:
 ```bash
 npm run server
 ```
+Secondly, run the frontend server:
+
+```bash
+npm run client
+```

@@ -16,31 +16,14 @@ function DashboardUserGoals() {
 
   const [subPage, setSubPage] = useState("apple");
 
-  const options = [
-    {
-      name: "apple",
-      keyword: "apple",
-    },
-    {
-      name: "fish",
-      keyword: "fish",
-    },
-    {
-      name: "cake",
-      keyword: "cake",
-    },
-    {
-      name: "mango",
-      keyword: "mango",
-    },
-  ];
+  const options = [];
   return (
     <DashboardLayout
       options={options}
       subPage={subPage}
       setSubPage={setSubPage}
     >
-      <div className="test">Dashboard User Goals</div>
+      <div className="test">Dashboard Users Goals</div>
     </DashboardLayout>
   );
 }

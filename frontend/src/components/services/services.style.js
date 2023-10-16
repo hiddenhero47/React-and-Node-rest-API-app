@@ -176,7 +176,61 @@ export const Box = styled.div`
     letter-spacing: 0.05em;
   }
 
+  span {
+    text-decoration: none;
+    color: #fff;
+    font-family: Urbanist;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+
   @media (max-width: 800px) {
     min-height: unset;
+  }
+`;
+
+export const ReadMore = styled.div`
+  width: 40vw;
+  height: auto;
+  max-height: 80vh;
+  background-color: rgb(23, 23, 23, 0.98);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.311);
+  overflow-y: auto;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    padding-bottom: 40px;
+  }
+
+  .paragraph {
+    color: white;
+    font-family: UrbanistBold;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+  }
+
+  @media (min-width: 741px) and (max-width: 800px) {
+    width: 75vw;
+  }
+
+  @media (min-width: 601px) and (max-width: 740px) {
+    width: 90vw;
+  }
+
+  @media (max-width: 600px) {
+    width: 98vw;
   }
 `;

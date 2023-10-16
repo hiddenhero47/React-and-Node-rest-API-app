@@ -146,6 +146,8 @@ function Content({ setSubPage, setCurrentContent, currentContent }) {
                         {new Date(content.createdAt).toLocaleString("en-US")}
                       </div>
 
+                      <p>Title: {content?.title}</p>
+
                       {content?.type === "text" && (
                         <p className="Textbox">{content?.content}</p>
                       )}
