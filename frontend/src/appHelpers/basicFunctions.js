@@ -71,3 +71,46 @@ export function numberToWords(number) {
 
   return numWords.join(" ");
 }
+
+export const GrabMe = (data, title) => {
+  let GrabbedContent;
+
+  if (!title || title.length === 0 || !data) {
+    return null;
+  }
+
+  if (Array.isArray(title)) {
+    GrabbedContent = data.filter((content) => title.includes(content.title));
+  } else {
+    GrabbedContent = data.find((content) => content.title === title);
+  }
+
+  if (
+    typeof GrabbedContent === "object" &&
+    Object.keys(GrabbedContent).length === 0
+  ) {
+    return null;
+  }
+
+  return GrabbedContent;
+};
+
+export const GiveMeSliderData = (data) => {
+  if (!data || data === undefined || data === null || Array.isArray(data)) {
+    return null;
+  }
+
+  const ImageURL = data?.content;
+  const tags = Object.values(data?.tags);
+
+  const content = ImageURL.map((element, index) => {
+    return {
+      pictures: element,
+      overlay: index+1 === 1 ? false : true,
+      narration:
+        tags[index] ?? "We Construct and Manage Places and Infrastructures.",
+    };
+  });
+
+  return content;
+};

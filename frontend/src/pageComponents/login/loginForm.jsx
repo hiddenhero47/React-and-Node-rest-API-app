@@ -57,6 +57,7 @@ function LoginForm() {
         </label>
 
         <input
+          autoComplete="current-email"
           type="email"
           name="email"
           id="email"
@@ -83,6 +84,7 @@ function LoginForm() {
         </label>
 
         <input
+          autoComplete="current-password"
           type="password"
           name="password"
           id="password"

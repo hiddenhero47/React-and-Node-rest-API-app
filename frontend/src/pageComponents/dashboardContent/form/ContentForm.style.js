@@ -82,6 +82,24 @@ export const FormControl = styled.div`
     font-family: Outfit;
   }
 
+  .myBigInput {
+    width: 100%;
+    height: 92px;
+    max-height: 92px;
+    max-width: 301px;
+    min-width: 100%;
+    min-height: 92px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+    font-family: Outfit;
+    background-color: #d9d9d9;
+  }
+
   .myInput {
     width: 100%;
     padding: 12px 20px;

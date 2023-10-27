@@ -363,7 +363,7 @@ const updateContent = asyncHandler(async (req, res) => {
 
   // Check if content are the same
   let ifTheSame = false;
-  if (content && type !== "text") {
+  if (content && type !== "text" && req.files <= 0) {
     let mongoContent = arrangeStoredUrl(findContentDB).content;
     let clientContent = Array.isArray(content) ? content : [content];
 
@@ -409,7 +409,7 @@ const updateContent = asyncHandler(async (req, res) => {
       deletedFile = await deleteFile(contentDB.content);
     }
   } else {
-    NewContent = content;
+    NewContent = findContentDB.content;
   }
 
   // Parse the tags string back into an object

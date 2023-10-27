@@ -420,14 +420,14 @@ function ContentForm({ setSubPage, setCurrentContent, currentContent }) {
               Content*
             </label>
 
-            <input
-              type="text"
+            <textarea
+              type="textarea"
               name="content"
               id="content"
               className={
                 touched.content && errors.content
-                  ? "myInput isError"
-                  : "myInput"
+                  ? "myBigInput isError"
+                  : "myBigInput"
               }
               onBlur={handleBlur}
               value={content || ""}
