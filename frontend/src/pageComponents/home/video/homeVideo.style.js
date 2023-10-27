@@ -54,6 +54,10 @@ export const VideoContainer = styled.div`
   .custom-video-player .video-poster {
     /* Add any custom styles for the poster image */
   }
+
+  @media (max-width: 450px) {
+    height: 300px;
+  }
 `;
 
 export const VideoPlaceHolder = styled.div`
