@@ -396,18 +396,18 @@ const updateContent = asyncHandler(async (req, res) => {
     } else {
       NewContent = await saveFile(req.files[0]);
     }
-    if (Array.isArray(contentDB.content)) {
-      deletedFile = await deleteMultipleFiles(contentDB.content);
-    } else if (contentDB.type !== "text") {
-      deletedFile = await deleteFile(contentDB.content);
-    }
+    // if (Array.isArray(contentDB.content)) {
+    //   deletedFile = await deleteMultipleFiles(contentDB.content);
+    // } else if (contentDB.type !== "text") {
+    //   deletedFile = await deleteFile(contentDB.content);
+    // }
   } else if (type === "text" && contentDB.type !== "text") {
     NewContent = content;
-    if (Array.isArray(contentDB.content)) {
-      deletedFile = await deleteMultipleFiles(contentDB.content);
-    } else {
-      deletedFile = await deleteFile(contentDB.content);
-    }
+    // if (Array.isArray(contentDB.content)) {
+    //   deletedFile = await deleteMultipleFiles(contentDB.content);
+    // } else {
+    //   deletedFile = await deleteFile(contentDB.content);
+    // }
   } else {
     NewContent = findContentDB.content;
   }
@@ -437,6 +437,22 @@ const updateContent = asyncHandler(async (req, res) => {
     }
   );
 
+  // handel delete
+
+  if (type !== "text" && !req.files <= 0 && !ifTheSame) {
+    if (Array.isArray(contentDB.content)) {
+      deletedFile = await deleteMultipleFiles(contentDB.content);
+    } else if (contentDB.type !== "text") {
+      deletedFile = await deleteFile(contentDB.content);
+    }
+  } else if (type === "text" && contentDB.type !== "text") {
+    if (Array.isArray(contentDB.content)) {
+      deletedFile = await deleteMultipleFiles(contentDB.content);
+    } else {
+      deletedFile = await deleteFile(contentDB.content);
+    }
+  }
+
   res.status(200).json(updatedContent);
 });
 
@@ -452,6 +468,8 @@ const deleteContent = asyncHandler(async (req, res) => {
   }
   const contentDB = arrangeStoredContent(findContentDB);
 
+  await Content.deleteOne(findContentDB);
+
   let deletedFile;
 
   if (contentDB.type !== "text") {
@@ -461,8 +479,7 @@ const deleteContent = asyncHandler(async (req, res) => {
       deletedFile = await deleteFile(contentDB.content);
     }
   }
-  await Content.deleteOne(findContentDB);
-
+  
   res.status(200).json(`${contentDB.header} ${contentDB.title}`);
 });
 

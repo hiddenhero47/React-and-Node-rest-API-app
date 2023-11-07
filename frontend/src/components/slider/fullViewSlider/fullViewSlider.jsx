@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getElementDimensionsRef } from "../../../appHelpers/dimensions";
+import { getElementDimensionsRef, useElementDimensions } from "../../../appHelpers/dimensions";
 import {
   SliderContainer,
   Slider,
@@ -50,12 +50,13 @@ const ImageSlider = ({AppSliderData, isLoading}) => {
   };
 
   let NewDimensions = getElementDimensionsRef(sliderRef);
+  let NewDimensionsX = useElementDimensions(sliderRef);
 
   const [slideWidth, setSlideWidth] = useState(getElementDimensionsRef(sliderRef).width);
 
   useEffect(() => {
     setSlideWidth(getElementDimensionsRef(sliderRef).width);
-  }, [NewDimensions])
+  }, [NewDimensions, NewDimensionsX])
   
 
   return (
@@ -73,7 +74,7 @@ const ImageSlider = ({AppSliderData, isLoading}) => {
             {content.map((element, index) => (
               <Slide
                 key={index}
-                width={slideWidth}
+                width={slideWidth || 0}
               >
                 <SlideContent>
                   <div className="imageHolder">

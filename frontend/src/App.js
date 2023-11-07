@@ -51,7 +51,7 @@ function App() {
             <Footer />
           </div>
         </Router>
-        <ToastContainer />
+        <ToastContainer theme="dark"/>
         {/* <ReactQueryDevtools initialIsOpen={false} position= "bottom-right"/> */}
       </QueryClientProvider>
     </>

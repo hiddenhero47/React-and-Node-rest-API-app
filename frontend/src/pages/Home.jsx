@@ -59,7 +59,7 @@ function Home() {
       <TitleBerar>
         {/* <HeaderTitle page={"Home"} /> */}
         <SliderContainer
-          AppSliderData={GiveMeSliderData(GrabMe(data, "homeSliderOne"))}
+          AppSliderData={GiveMeSliderData(GrabMe(data || [], "homeSliderOne"))}
           isLoading={isLoading}
         />
       </TitleBerar>

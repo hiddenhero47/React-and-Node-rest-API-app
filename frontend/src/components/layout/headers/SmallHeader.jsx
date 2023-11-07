@@ -21,7 +21,8 @@ function SmallHeader() {
 //   const dispatch = useDispatch();
 //   const { user } = useSelector((state) => state.auth);
 
-//   const phoneNumber = "+01 569 896 654";
+  const phoneNumber = "+01 569 896 654";
+  const email = "satnacontractors.com";
   const alink = "https://web.facebook.com/login/?_rdc=1&_rdr";
 
 //   const onLogout = () => {
@@ -123,23 +124,23 @@ function SmallHeader() {
 
               <div className="box end">
                 <div className="middle">
-                  <div className="middleIcon">
+                  <a href={`mailto:${email}`} className="middleIcon">
                     {screenSize.width >= 370 ? (
                        <Mail width={53} height={53} />
                     ): (
                         <Mail width={43} height={43} />  
                     )}
-                  </div>
+                  </a>
                 </div>
 
                 <div className="middle">
-                  <div className="middleIcon">
+                  <a href={`tel:${phoneNumber}`} className="middleIcon">
                     {screenSize.width >= 370 ? (
                        <Call width={53} height={53} />
                     ): (
                         <Call width={43} height={43} />  
                     )}
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>

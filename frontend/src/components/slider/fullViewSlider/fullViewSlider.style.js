@@ -4,9 +4,12 @@ import styled from "styled-components";
 
 export const SliderContainer = styled.div`
   position: relative;
-  width: 100%;
+  /* width: 100%; */
+  width: 100vw;
   height: 520px;
   overflow: hidden;
+  background-color: #171717;
+  transition: transform 0.5s ease;
 `;
 
 export const Slider = styled.div`
@@ -19,7 +22,8 @@ export const Slider = styled.div`
 
 export const Slide = styled.div`
   /* flex: 0 0 100%; */
-  width: ${(props) => props.width}px;
+  /* width: ${(props) => props.width}px; */
+  width: 100vw;
   height: 100%;
   position: relative;
   transition: transform 0.5s ease;
@@ -77,6 +81,7 @@ export const Narration = styled.div`
     line-height: 60px;
     letter-spacing: 0em;
     color: rgba(255, 255, 255, 1);
+    transition: transform 0.5s ease;
   }
 
   @media (min-width: 901px) and (max-width: 1000px) {
@@ -154,5 +159,10 @@ export const Loader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(82, 86, 86, 0.1);
+  background: linear-gradient(
+    90deg,
+    rgba(51, 51, 51, 0.9570421918767507) 0%,
+    rgba(51, 51, 51, 0.8954175420168067) 100%
+  );
 `;
