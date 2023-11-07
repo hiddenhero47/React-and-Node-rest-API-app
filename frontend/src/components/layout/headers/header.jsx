@@ -23,6 +23,7 @@ function Header() {
   const { user } = useSelector((state) => state.auth);
 
   const phoneNumber = "+01 569 896 654";
+  const email = "satnacontractors.com";
   const alink = "https://web.facebook.com/login/?_rdc=1&_rdr";
   const screenSize = useScreenSize();
 
@@ -111,19 +112,19 @@ function Header() {
 
                   <div className="box end">
                     <div className="middle">
-                      <div className="middleIcon">
+                      <a href={`mailto:${email}`} className="middleIcon">
                         <Mail width={53} height={53} />
-                      </div>
+                      </a>
                       <span className="talkTo">
                         <div>Talk to Us</div>
-                        <div>satnacontractors.com</div>
+                        <div>{email}</div>
                       </span>
                     </div>
 
                     <div className="middle">
-                      <div className="middleIcon">
+                      <a href={`tel:${phoneNumber}`} className="middleIcon">
                         <Call width={53} height={53} />
-                      </div>
+                      </a>
                       <span className="talkTo">
                         <div>Contact Us</div>
                         <div>{phoneNumber}</div>
