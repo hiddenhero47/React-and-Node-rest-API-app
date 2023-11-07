@@ -12,6 +12,7 @@ const useGetContentQuery = ({ searchField, searchString }) => {
         // console.log("Data fetched successfully:", data);
       },
       refetchOnWindowFocus: false,
+      // retry: 0,
     }
   );
 

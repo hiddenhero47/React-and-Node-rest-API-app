@@ -80,9 +80,9 @@ export const GrabMe = (data, title) => {
   }
 
   if (Array.isArray(title)) {
-    GrabbedContent = data.filter((content) => title.includes(content.title));
+    GrabbedContent = data?.filter((content) => title.includes(content.title));
   } else {
-    GrabbedContent = data.find((content) => content.title === title);
+    GrabbedContent = data?.find((content) => content.title === title);
   }
 
   if (
