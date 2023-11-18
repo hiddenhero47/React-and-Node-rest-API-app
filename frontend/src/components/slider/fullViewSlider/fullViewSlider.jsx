@@ -27,13 +27,15 @@ const ImageSlider = ({AppSliderData, isLoading}) => {
 
   useEffect(() => {
     const slideShowTimer = setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % content.length);
+      if (!isLoading) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % content.length);
+      }
     }, 5000); // Auto slide change every 5 seconds
 
     return () => {
       clearTimeout(slideShowTimer);
     };
-  }, [content.length, currentIndex]);
+  }, [content.length, currentIndex, isLoading]);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
